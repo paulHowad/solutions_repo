@@ -56,7 +56,7 @@ plt.figure(figsize=(10, 6))
 for angle in angles:
     x, y = projectile_motion(v0, angle)
     plt.plot(x, y, label=f'θ = {angle}°')
-
+![alt text](image.png)
 plt.title('Projectile Motion: Range vs. Angle of Projection')
 plt.xlabel('Horizontal Distance (m)')
 plt.ylabel('Vertical Distance (m)')
