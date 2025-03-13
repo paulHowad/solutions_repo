@@ -216,8 +216,9 @@ angles = [15, 30, 45, 60, 75]  # Angles in degrees</p>
 <p>plt.figure(figsize=(10, 6))</p>
 <p>for angle in angles:
     x, y = projectile_motion(v0, angle)
-    plt.plot(x, y, label=f'θ = {angle}°')</p>
-<p>plt.title('Projectile Motion: Range vs. Angle of Projection')
+    plt.plot(x, y, label=f'θ = {angle}°')
+<img alt="alt text" src="../image.png"/>
+plt.title('Projectile Motion: Range vs. Angle of Projection')
 plt.xlabel('Horizontal Distance (m)')
 plt.ylabel('Vertical Distance (m)')
 plt.axhline(0, color='black', lw=0.5, ls='--')
