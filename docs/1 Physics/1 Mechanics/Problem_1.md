@@ -1,5 +1,3 @@
-# Problem 1
-
 1. Theoretical Foundation
 Deriving the Governing Equations of Motion:
 
@@ -70,5 +68,3 @@ plt.xlim(0, 200)
 plt.ylim(0, 50)
 plt.show()
 Visualization: This script will generate a plot showing the trajectories of projectiles launched at different angles with the same initial velocity. The resulting graph will illustrate how the angle of projection affects the range and height of the projectile, providing a visual understanding of the underlying physics.
-
-    Regenerate
