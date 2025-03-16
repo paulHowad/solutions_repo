@@ -172,6 +172,82 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<ol>
+<li>Theoretical Foundation
+Differential Equation: The motion of a forced damped pendulum can be described by the following second-order differential equation:</li>
+</ol>
+<p>[ \frac{d^2\theta}{dt^2} + 2\beta \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t) ]</p>
+<p>Where:</p>
+<p>(\theta) is the angular displacement.
+(\beta) is the damping coefficient.
+(g) is the acceleration due to gravity.
+(L) is the length of the pendulum.
+(A) is the amplitude of the external driving force.
+(\omega) is the angular frequency of driving force.
+Small-Angle Approximation: For small angles, we can approximate (\sin(\theta) \approx \theta). This simplifies the equation to:</p>
+<p>[ \frac{d^2\theta}{dt^2} + 2\beta \frac{d\theta}{dt} + \frac{g}{L} \theta = A \cos(\omega t) ]</p>
+<p>Resonance Conditions: onance occurs when the frequency of the external force matches the natural frequency of the system. The natural frequency (\omega_0) is given by:</p>
+<p>[ \omega_0 = \sqrt{\frac{gL}} ]</p>
+<p>When (\omega \approx \omega_0), the system can exhibit large oscillations, leading to resonance.</p>
+<ol>
+<li>Analysis of Dynamics
+Influence of Parameters:</li>
+</ol>
+<p>Damping Coefficient ((\beta)): Higher damping reduces the amplitude of oscillations and can lead to a quicker return to equilibrium.
+Driving Amplitude ((A)): Increasing the amplitude of the driving force increases the maximum displacement of the pendulum.
+Driving Frequency ((\omega)): Varying the frequency can lead to different behaviors, including regular oscillations, resonance, and chaotic motion.
+Transition to Chaos: As the driving frequency is varied, the system can transition from periodic motion to chaotic behavior. This can be observed through phase diagrams and Poincaré sections.</p>
+<ol>
+<li>Practical Applications
+The forced damped pend model has several real-world applications, including:</li>
+</ol>
+<p>Energy Harvesting Devices: Systems that convert mechanical energy from oscillations into electrical energy.
+Suspension Bridges: Understanding how external forces (like wind) affect the stability of bridges.
+Oscillating Circuits: Analyzing how circuits respond to periodic driving forces.
+4. Implementation
+Here’s a Python script that simulates the motion of a forced damped pendulum and visualizes its behavior under various conditions:</p>
+<p>python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint</p>
+<h1 id="constants">Constants</h1>
+<p>g = 9.81  # Acceleration due to gravity (m/s^2)
+L = 1.0   # Length of the pendulum (m)
+beta = 0.1  # Damping coefficient
+A = 1.0   # Amplitude of the driving force
+omega = 2.0  # Driving frequency</p>
+<h1 id="differential-equation-for-the-forced-damped-pendulum">Differential equation for the forced damped pendulum</h1>
+<p>def pendulum_equations(y, t):
+    theta, omega = y
+    dydt = [omega, -2 * beta * omega - (g / L) * np.sin(theta) + A * np.cos(omega * t)]
+    return dydt</p>
+<h1 id="initial-conditions">Initial conditions</h1>
+<p>y0 = [0.1, 0.0]  # Initial angle (radians) and initial angular velocity</p>
+<h1 id="time-points">Time points</h1>
+<p>t = np.linspace(0, 20, 1000)  # Time from 0 to 20 seconds</p>
+<h1 id="solve-the-differential-equation">Solve the differential equation</h1>
+<p>solution = odeint(pendulum_equations, y0, t)</p>
+<h1 id="plotting-the-results">Plotting the results</h1>
+<p>plt.figure(figsize=(10, 5))
+plt.plot(t, solution[:, 0], label='Angle (theta)')
+plt.title('Forced Damped Pendulum Motion')
+plt.xlabel('Time (s)')
+plt.ylabel('Angle (radians)')
+plt.axhline(0 color='black', lw=0.5, ls='--')
+plt.gridplt.legend()
+plt.show()
+<img alt="
+" src="../image-4.png"/>
+<img alt="alt text" src="../image-5.png"/>
+Graphical Output
+When you run the above code, you will see a plot showing how the angle of the pendulum changes over time. The oscillations will demonstrate the effects of damping and the external driving force.</p>
+<p>Conclusion
+The forced damped pendulum exhibits complex behavior influenced by damping, driving forces, and frequency.
+The model can transition from simple harmonic motion to chaotic behavior, depending on the parameters.
+This investigation provides insights into various real-world systems and applications.
+Limitations and Future Work
+The model assumes small angles and linear damping. Future work could explore nonlinear damping and non-periodic driving forces to better represent real-world scenarios.</p>
+<p>Additional analysis could include phase portraits and bifurcation diagrams to visualize transitions to chaos.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
