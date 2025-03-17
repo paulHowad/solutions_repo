@@ -74,8 +74,12 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#5-implementation-python-simulation">5. Implementation: Python Simulation</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#simulation-output">Simulation Output</a>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-output-from-python-code">Simulation Output from Python code</a>
 </li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+<ul>
 <li class="toctree-l4"><a class="reference internal" href="#explanation-of-the-code">Explanation of the Code</a>
 </li>
 </ul>
@@ -320,18 +324,15 @@ plt.legend()
 plt.grid(True)
 plt.show()
 </code></pre>
-<h3 id="simulation-output">Simulation Output</h3>
-<p>Below is the static image generated from the Python simulation:</p>
-<p><br/>
-<img alt="Projectile Range vs Angle" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png" style="max-width:100%; display:block; margin: 0 auto;"/>
-<br/></p>
-<hr/>
+<h3 id="simulation-output-from-python-code">Simulation Output from Python code</h3>
+<p>Here is the static image generated from google colab:</p>
+<h2 id="_1"><img alt="alt text" src="../image-6.png"/></h2>
 <h3 id="explanation-of-the-code">Explanation of the Code</h3>
 <ul>
-<li><strong>Parameter Setup:</strong><br>
-  We define the gravitational acceleration <span class="arithmatex">\(g\)</span> and the initial velocity <span class="arithmatex">\(v_0\)</span>.</br></li>
-<li><strong>Angle Range:</strong><br>
-  Angles are sampled from 0° to 90° and converted to radians.</br></li>
+<li><strong>Parameter Setup:</strong><br/>
+  We define the gravitational acceleration <span class="arithmatex">\(g\)</span> and the initial velocity <span class="arithmatex">\(v_0\)</span>.</li>
+<li><strong>Angle Range:</strong><br/>
+  Angles are sampled from 0° to 90° and converted to radians.</li>
 <li><strong>Range Calculation:</strong><br/>
   The range for each angle is computed using the derived formula.</li>
 <li><strong>Visualization:</strong><br/>
