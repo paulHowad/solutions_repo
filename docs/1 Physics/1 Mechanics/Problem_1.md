@@ -142,7 +142,7 @@ plt.show()
  
 ### Simulation Output from Python code
  
-Here is the static image generated from google colab:
+Here is the static image generated from google colab by using python code:
  
 ![alt text](image-6.png)
 ---
