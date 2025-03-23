@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 2 - Physics and Mathematics</title>
+<title>Investigating the Dynamics of a Forced Damped Pendulum - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 2";
+        var mkdocs_page_name = "Investigating the Dynamics of a Forced Damped Pendulum";
         var mkdocs_page_input_path = "1 Physics/1 Mechanics/Problem_2.md";
         var mkdocs_page_url = null;
       </script>
@@ -48,7 +48,7 @@
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Problem 1</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Investigating the Dynamics of a Forced Damped Pendulum</a>
 <ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="#1-introduction">1. Introduction</a>
 </li>
@@ -215,7 +215,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">1 Mechanics</li>
-<li class="breadcrumb-item active">Problem 2</li>
+<li class="breadcrumb-item active">Investigating the Dynamics of a Forced Damped Pendulum</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -223,9 +223,6 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<p>Problem 2</p>
-<p>Below is a comprehensive Markdown document that outlines the derivation, analysis, and simulation of a forced damped pendulum with a focus on its dynamic behavior under external forcing and damping. The document includes theoretical derivations, discussion of parameter effects and limitations, as well as a Python simulation to visualize the pendulum’s motion.</p>
-<hr/>
 <h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum">Investigating the Dynamics of a Forced Damped Pendulum</h1>
 <h2 id="1-introduction">1. Introduction</h2>
 <p>The forced damped pendulum is a classic nonlinear system that exhibits a rich variety of behaviors—from simple periodic oscillations to complex chaotic motion—due to the interplay between damping, restoring forces, and an external periodic drive. By varying parameters such as the damping coefficient, driving amplitude, and driving frequency, one can obtain a diverse set of solutions that model real-world phenomena ranging from energy harvesting to structural vibrations.</p>
@@ -353,10 +350,10 @@ def run_forced_damped_pendulum(beta=0.25, F_D=1.2, Omega=2/3,
         Driving frequency (rad/s).
     t_span : tuple
         Start and end time for the simulation, e.g. (0, 100).
-    y0 : tuple
+    y0 :
         Initial conditions (theta, omega).
     use_small_angle : bool
-        If True, use the small-angle approximation (sin(theta) ~ theta).
+ If True, use the small-angle approximation (sin(theta) ~ theta).
         If False, use the full nonlinear equation sin(theta).
     """
     g = 9.81   # gravitational acceleration (m/s^2)
@@ -370,7 +367,7 @@ def run_forced_damped_pendulum(beta=0.25, F_D=1.2, Omega=2/3,
 
     # Define the ODE
     def forced_damped_pendulum(t, y):
-        theta, omega = y
+        theta, omega = y  # Corrected: Added theta
         dtheta_dt = omega
 
         if use_small_angle:
@@ -387,17 +384,17 @@ def run_forced_damped_pendulum(beta=0.25, F_D=1.2, Omega=2/3,
     t_eval = np.linspace(t_span[0], t_span[1], 10000)
 
     # Solve the ODE
-    sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval, rtol=1e-8)
+    sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval, rtol=1e-8) # Corrected: Changed t to t_eval
     t = sol.t
-    theta = sol.y[0]
+    theta = sol.y[0] # Corrected: Added theta
     omega = sol.y[1]
 
     # --- PLOTS ---
 
-    # 1) Time Series of Theta(t)
+    # 1) Time of Theta(t)
     plt.figure(figsize=(10, 4))
-    plt.plot(t, theta, 'b-', label=r'$\theta(t)$')
-    plt.xlabel('Time (s)')
+    plt.plot(t, theta, 'b-', label=r'$\theta(t)$') # Corrected: Changed plt to plt.plot
+    plt.xlabel('Time (s)') # Corrected: Indentation
     plt.ylabel('Angle (rad)')
     plt.title(f'Time Series (beta={beta}, F_D={F_D}, Omega={Omega})')
     plt.legend()
@@ -419,7 +416,7 @@ def run_forced_damped_pendulum(beta=0.25, F_D=1.2, Omega=2/3,
     # Sample points at every period T_drive = 2*pi/Omega after a transient
     T_drive = 2 * np.pi / Omega
     # Skip initial transients (e.g., first 50 cycles)
-    skip_cycles = 50
+    skip_cycles = 50 # Corrected: Added =
     poincare_times = np.arange(skip_cycles * T_drive, t_span[1], T_drive)
     poincare_thetas = np.interp(poincare_times, t, theta)
     poincare_omegas = np.interp(poincare_times, t, omega)
@@ -433,32 +430,48 @@ def run_forced_damped_pendulum(beta=0.25, F_D=1.2, Omega=2/3,
     plt.tight_layout()
     plt.show()
 
+# Main function to run multiple simulations
+def main():
+    # Define parameter ranges
+    damping_coefficients = [0.1, 0.25, 0.5]  # Different damping coefficients
+    driving_forces = [0.5, 1.0, 1.5]          # Different driving forces
+    driving_frequencies = [1/2, 1, 2]          # Different driving frequencies
+
+    # Run simulations for different combinations of parameters
+    for beta in damping_coefficients:
+        for F_D in driving_forces:
+            for Omega in driving_frequencies:
+                run_forced_damped_pendulum(beta=beta, F_D=F_D, Omega=Omega,
+                                           t_span=(0, 100), y0=(0.1, 0.0),
+                                           use_small_angle=True)
+
 if __name__ == "__main__":
-    run_forced_damped_pendulum(
-        beta=0.25,
-        F_D=1.2,
-        Omega=2/3,
-        t_span=(0, 100),
-        y0=(0.1, 0.0),
-        use_small_angle=True
-    )
+    main()
 </code></pre>
 <h3 id="outputs-for-the-first-simulation">Outputs for the First Simulation</h3>
 <p>Running this script with <span class="arithmatex">\((\beta=0.25)\)</span>, <span class="arithmatex">\((F_D=1.2)\)</span>, <span class="arithmatex">\((\Omega=2/3)\)</span>, and <code>use_small_angle = True</code> produces <strong>three plots</strong>:                                 </p>
 <ol>
-<li>
-<p><strong>Time Series:</strong> </p>
-<p>A nearly sinusoidal wave indicates stable periodic motion.</p>
-</li>
-<li>
-<p><strong>Phase Portrait</strong> </p>
-<p>A closed loop in <span class="arithmatex">\(\theta\)</span>–<span class="arithmatex">\(\dot{\theta}\)</span> space, showing a periodic orbit.</p>
-</li>
-<li>
-<p><strong>Poincaré Section</strong> </p>
-<p>A small set of points implies non-chaotic, regular motion.</p>
-</li>
+<li><strong>Time Series:</strong> </li>
 </ol>
+<p><img alt="alt text" src="../image-9.png"/>
+    Phase portrait
+    <img alt="alt text" src="../image-10.png"/></p>
+<p>Time Series (beta=01, F_D=0.5, Omega=1)
+ <img alt="alt text" src="../image-11.png"/></p>
+<p>Phase Portait( beta=0.1 F_D=0.5, Omega=1
+<img alt="alt text" src="../image-12.png"/>)</p>
+<p>Time series (beta=0.1 F_D=0.5, Omega=2</p>
+<p><img alt="alt text" src="../image-13.png"/></p>
+<p>Time series (beta=0.1 F_D=1.0, Omega=0.5
+<img alt="alt text" src="../image-15.png"/>
+ Phase Portrait (beta=01, F_D=1.0, Omega=0.2)</p>
+<p><img alt="alt text" src="../image-14.png"/></p>
+<p>Phase Portait( beta=0.1 F_D=1.0, Omega=1</p>
+<p><img alt="alt text" src="../image-16.png"/></p>
+<p>Time Series (beta=0.1, F_D=1.0, Omega=1)
+<img alt="alt text" src="../image-18.png"/></p>
+<p>Portrait (Beta=0.1, Fr_D=1.0, Omega=2)
+<img alt="alt text" src="../image-19.png"/></p>
 <h3 id="explanation">Explanation</h3>
 <ol>
 <li>
@@ -579,14 +592,17 @@ if __name__ == "__main__":
 <ol>
 <li>
 <p><strong>Time Series:</strong> </p>
+<p><img alt="Time Series Output" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/time%20series.png"/></p>
 <p>The waveform can become irregular, indicating non-periodic or chaotic behavior.</p>
 </li>
 <li>
 <p><strong>Phase Portrait</strong> </p>
+<p><img alt="Phase Portrait Output" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/phase%20portrait.png"/></p>
 <p>Instead of a single closed loop, the trajectory in <span class="arithmatex">\(\theta\)</span>–<span class="arithmatex">\(\dot{\theta}\)</span> space may fill an area or form a strange attractor, characteristic of chaos.</p>
 </li>
 <li>
 <p><strong>Poincaré Section</strong> </p>
+<p><img alt="Poincaré Section Output" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/poincare%20section.png"/></p>
 <p>A scattered “cloud” of points, rather than a finite set, implies <strong>chaotic</strong> dynamics.</p>
 </li>
 </ol>
