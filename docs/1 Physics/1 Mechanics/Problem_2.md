@@ -1,9 +1,3 @@
-Problem 2
- 
-Below is a comprehensive Markdown document that outlines the derivation, analysis, and simulation of a forced damped pendulum with a focus on its dynamic behavior under external forcing and damping. The document includes theoretical derivations, discussion of parameter effects and limitations, as well as a Python simulation to visualize the pendulum’s motion.
- 
----
- 
 # Investigating the Dynamics of a Forced Damped Pendulum
  
 ## 1. Introduction
@@ -125,13 +119,13 @@ Below is the Python code for our **initial simulation** under the small-angle ap
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
- 
+
 def run_forced_damped_pendulum(beta=0.25, F_D=1.2, Omega=2/3,
                                t_span=(0, 100), y0=(0.1, 0.0),
                                use_small_angle=True):
     """
     Simulates and plots the forced damped pendulum.
- 
+
     Parameters:
     -----------
     beta : float
@@ -142,58 +136,58 @@ def run_forced_damped_pendulum(beta=0.25, F_D=1.2, Omega=2/3,
         Driving frequency (rad/s).
     t_span : tuple
         Start and end time for the simulation, e.g. (0, 100).
-    y0 : tuple
+    y0 :
         Initial conditions (theta, omega).
     use_small_angle : bool
-        If True, use the small-angle approximation (sin(theta) ~ theta).
+ If True, use the small-angle approximation (sin(theta) ~ theta).
         If False, use the full nonlinear equation sin(theta).
     """
     g = 9.81   # gravitational acceleration (m/s^2)
     L = 1.0    # pendulum length (m)
     m = 1.0    # mass (kg)
- 
+
     # Natural frequency
     omega0 = np.sqrt(g / L)
     # Driving force term
     driving_force = F_D / (m * L)
- 
+
     # Define the ODE
     def forced_damped_pendulum(t, y):
-        theta, omega = y
+        theta, omega = y  # Corrected: Added theta
         dtheta_dt = omega
- 
+
         if use_small_angle:
             # Small-angle approximation: sin(theta) ~ theta
             restoring = -omega0**2 * theta
         else:
             # Full nonlinear: sin(theta)
             restoring = -omega0**2 * np.sin(theta)
- 
+
         domega_dt = -2 * beta * omega + restoring + driving_force * np.cos(Omega * t)
         return [dtheta_dt, domega_dt]
- 
+
     # Create a time array for evaluation
     t_eval = np.linspace(t_span[0], t_span[1], 10000)
- 
+
     # Solve the ODE
-    sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval, rtol=1e-8)
+    sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval, rtol=1e-8) # Corrected: Changed t to t_eval
     t = sol.t
-    theta = sol.y[0]
+    theta = sol.y[0] # Corrected: Added theta
     omega = sol.y[1]
- 
+
     # --- PLOTS ---
- 
-    # 1) Time Series of Theta(t)
+
+    # 1) Time of Theta(t)
     plt.figure(figsize=(10, 4))
-    plt.plot(t, theta, 'b-', label=r'$\theta(t)$')
-    plt.xlabel('Time (s)')
+    plt.plot(t, theta, 'b-', label=r'$\theta(t)$') # Corrected: Changed plt to plt.plot
+    plt.xlabel('Time (s)') # Corrected: Indentation
     plt.ylabel('Angle (rad)')
     plt.title(f'Time Series (beta={beta}, F_D={F_D}, Omega={Omega})')
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
     plt.show()
- 
+
     # 2) Phase Portrait (theta vs. omega)
     plt.figure(figsize=(6, 6))
     plt.plot(theta, omega, 'r-', lw=0.8)
@@ -203,16 +197,16 @@ def run_forced_damped_pendulum(beta=0.25, F_D=1.2, Omega=2/3,
     plt.grid(True)
     plt.tight_layout()
     plt.show()
- 
+
     # 3) Poincaré Section
     # Sample points at every period T_drive = 2*pi/Omega after a transient
     T_drive = 2 * np.pi / Omega
     # Skip initial transients (e.g., first 50 cycles)
-    skip_cycles = 50
+    skip_cycles = 50 # Corrected: Added =
     poincare_times = np.arange(skip_cycles * T_drive, t_span[1], T_drive)
     poincare_thetas = np.interp(poincare_times, t, theta)
     poincare_omegas = np.interp(poincare_times, t, omega)
- 
+
     plt.figure(figsize=(6, 6))
     plt.scatter(poincare_thetas, poincare_omegas, c='green', s=25)
     plt.xlabel(r'$\theta$ (rad)')
@@ -221,16 +215,24 @@ def run_forced_damped_pendulum(beta=0.25, F_D=1.2, Omega=2/3,
     plt.grid(True)
     plt.tight_layout()
     plt.show()
- 
+
+# Main function to run multiple simulations
+def main():
+    # Define parameter ranges
+    damping_coefficients = [0.1, 0.25, 0.5]  # Different damping coefficients
+    driving_forces = [0.5, 1.0, 1.5]          # Different driving forces
+    driving_frequencies = [1/2, 1, 2]          # Different driving frequencies
+
+    # Run simulations for different combinations of parameters
+    for beta in damping_coefficients:
+        for F_D in driving_forces:
+            for Omega in driving_frequencies:
+                run_forced_damped_pendulum(beta=beta, F_D=F_D, Omega=Omega,
+                                           t_span=(0, 100), y0=(0.1, 0.0),
+                                           use_small_angle=True)
+
 if __name__ == "__main__":
-    run_forced_damped_pendulum(
-        beta=0.25,
-        F_D=1.2,
-        Omega=2/3,
-        t_span=(0, 100),
-        y0=(0.1, 0.0),
-        use_small_angle=True
-    )
+    main()
 ```
  
 ### Outputs for the First Simulation
@@ -239,18 +241,36 @@ Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_s
  
 1. **Time Series:**                                                                
  
-
-    A nearly sinusoidal wave indicates stable periodic motion.
+![alt text](image-9.png)
+    Phase portrait
+    ![alt text](image-10.png)
  
-2. **Phase Portrait**                                                              
+ Time Series (beta=01, F_D=0.5, Omega=1)
+ ![alt text](image-11.png)
 
-    A closed loop in $\theta$–$\dot{\theta}$ space, showing a periodic orbit.
- 
-3. **Poincaré Section**                                                               
+Phase Portait( beta=0.1 F_D=0.5, Omega=1
+![alt text](image-12.png))
 
-    
-    A small set of points implies non-chaotic, regular motion.
- 
+Time series (beta=0.1 F_D=0.5, Omega=2
+
+![alt text](image-13.png)
+
+Time series (beta=0.1 F_D=1.0, Omega=0.5
+![alt text](image-15.png)
+ Phase Portrait (beta=01, F_D=1.0, Omega=0.2)
+
+![alt text](image-14.png)
+
+Phase Portait( beta=0.1 F_D=1.0, Omega=1
+
+![alt text](image-16.png)
+
+Time Series (beta=0.1, F_D=1.0, Omega=1)
+![alt text](image-18.png)
+
+Portrait (Beta=0.1, Fr_D=1.0, Omega=2)
+![alt text](image-19.png)
+
 ### Explanation
 1. **Time Series:**         
     Shows how $\theta(t)$ evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.                                <br><br>
@@ -366,15 +386,19 @@ Running this script with $(\beta=0.2$), $(F_D=1.5)$, $\Omega=\tfrac{2}{3}$, and 
  
 1. **Time Series:**                                                                
  
+    ![Time Series Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/time%20series.png)
+ 
     The waveform can become irregular, indicating non-periodic or chaotic behavior.
  
 2. **Phase Portrait**                                                              
-
+ 
+    ![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/phase%20portrait.png)
  
     Instead of a single closed loop, the trajectory in $\theta$–$\dot{\theta}$ space may fill an area or form a strange attractor, characteristic of chaos.
  
 3. **Poincaré Section**                                                               
-  
+    
+    ![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/poincare%20section.png)
     
     A scattered “cloud” of points, rather than a finite set, implies **chaotic** dynamics.
  
