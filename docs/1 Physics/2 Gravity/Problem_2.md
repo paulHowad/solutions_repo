@@ -30,7 +30,7 @@ celestial_bodies = {
     'Earth': (5.972 * 10**24, 6.371 * 10**6, 1.496 * 10**11),
     'Mars': (0.64171 * 10**24, 3.3895 * 10**6, 2.279 * 10**11),
     'Jupiter': (1.898 * 10**27, 6.9911 * 10**7, 7.785 * 10**11)
-}
+
 
 # Function to calculate escape velocity
 def escape_velocity(M, r):
