@@ -174,28 +174,28 @@
 <h1 id="problem-1">Problem 1</h1>
 <ol>
 <li>Derivation of Kepler's Third Law
-Kepler's Third Law states: [ T^2 \propto r^3 ] Where:</li>
+Kepler's Third Law states: $$ T^2 \propto r^3 $$ Where:</li>
 </ol>
 <p>(T) is the orbital period,
 (r) is the orbital radius.
 Derivation: For a body in circular orbit around a central mass (M), the gravitational force provides the necessary centripetal force:</p>
-<p>[ \frac{GMm}{r^2} = \frac{mv^2}{r} ]</p>
+<div class="arithmatex">\[ \frac{GMm}{r^2} = \frac{mv^2}{r} \]</div>
 <p>Where:</p>
 <p>(G) the gravitational constant ((6.674 \times 10^{-11} \ \text{m}^3/\text{kg} \cdot {s}^2)),
 (m) is the mass of the orbiting body,
 (v) is the orbital speed.
 The orbital speed can be expressed in terms of the orbital period (T):</p>
-<p>[ v = \frac{2\pi r}{T} ]</p>
+<div class="arithmatex">\[ v = \frac{2\pi r}{T} \]</div>
 <p>Substituting this into the centripetal force equation gives:</p>
-<p>[ \frac{GMm}{r^2} = \frac{m(2\pi r)^2}{r} ]</p>
+<div class="arithmatex">\[ \frac{GMm}{r^2} = \frac{m(2\pi r)^2}{r} \]</div>
 <p>Simplifying leads to:</p>
-<p>[ \fracGM}{r^2} = \frac{4\pi^2 m}{T^2} ]</p>
+<div class="arithmatex">\[ \fracGM}{r^2} = \frac{4\pi^2 m}{T^2} \]</div>
 <p>Rearranging gives:</p>
-<p>[ T^2 = \frac{4\pi^2 r^3}{GM} ]</p>
+<div class="arithmatex">\[ T^2 = \frac{4\pi^2 r^3}{GM} \]</div>
 <p>This shows that the square of the orbital period is proportional to the cube of the orbital radius.</p>
 <ol>
 <li>Implications for Astronomy
-Calculating Planetary Masses: By observing the orbital period and radius of a satellite or planet, we can calculate the mass of the central body using the rearranged formula: [ M = \frac{4\pi^2 r^3}{G T^2} ]</li>
+Calculating Planetary Masses: By observing the orbital period and radius of a satellite or planet, we can calculate the mass of the central body using the rearranged formula: $$ M = \frac{4\pi^2 r^3}{G T^2} $$</li>
 </ol>
 <p>Understanding Orbital Dynamics: Kepler's Third Law helps us understand the dynamics of planetary systems, including the relationships between different planets and their distances from the Sun.</p>
 <ol>
@@ -233,7 +233,7 @@ return T
 <h1 id="define-a-range-of-orbital-radii-in-meters">Define a range of orbital radii (in meters)</h1>
 <p>radii = np.linspace(1e11, 1.5e12, 100)  # From 100 million km to 1.5 billion km</p>
 <h1 id="calculate-the-corresponding-orbital-periods">Calculate the corresponding orbital periods</h1>
-<p>periods = np.array([calculate_orbital_period(r) for r in radii])</p>
+<p>periods = np.array(<span class="arithmatex">\(<span class="arithmatex">\(calculate_orbital_period(r) for r in radii\)</span>\)</span>)</p>
 <h1 id="periods-from-seconds-to-days-for-better-interpretation">periods from seconds to days for better interpretation</h1>
 <p>periods_days = periods / (24 * 3600)  # Convert seconds to days</p>
 <h1 id="plotting-the-results">Plotting the results</h1>
@@ -306,7 +306,7 @@ return mass
 earth_period = 365.25 * 24 * 3600  # Orbital period of Earth (in seconds)</p>
 <p>mass_sun = calculate_mass(earth_radius, earth_period)
 print(f"Calculated mass of the Sun: {mass_sun:.2e} kg")
-<img alt="alt text" src="../image.png"/></p>
+!<span class="arithmatex">\(<span class="arithmatex">\(alt text\)</span>\)</span>(image.png)</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
