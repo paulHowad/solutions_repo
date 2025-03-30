@@ -1,163 +1,146 @@
-# Problem 1
-1. Derivation of Kepler's Third Law
-Kepler's Third Law states: $$ T^2 \propto r^3 $$ Where:
+Orbital Period and Orbital Radius: An Analysis of Kepler's Third Law
+Introduction
+Kepler's Third Law of Planetary Motion states that the square of the orbital period (T) of a planet is directly proportional to the cube of the semi-major axis (r) of its orbit. This relationship can be expressed mathematically as:
 
-(T) is the orbital period,
-(r) is the orbital radius.
-Derivation: For a body in circular orbit around a central mass (M), the gravitational force provides the necessary centripetal force:
+$$ T^2 \propto r^3 $$
 
-$$ \frac{GMm}{r^2} = \frac{mv^2}{r} $$
+or, more formally,
 
-Where:
+$$ \frac{T^2}{r^3} = \text{constant} $$
 
-(G) the gravitational constant ((6.674 \times 10^{-11} \ \text{m}^3/\text{kg} \cdot {s}^2)),
-(m) is the mass of the orbiting body,
-(v) is the orbital speed.
-The orbital speed can be expressed in terms of the orbital period (T):
+This law is fundamental in celestial mechanics and has significant implications for understanding the dynamics of planetary systems, satellite orbits, and gravitational interactions.
 
-$$ v = \frac{2\pi r}{T} $$
+Derivation of Kepler's Third Law
+For a circular orbit, the gravitational force provides the necessary centripetal force to keep a planet in orbit. The gravitational force ( F ) between two masses ( M ) (the mass of the central body) and ( m ) (the mass of the orbiting body) is given by Newton's law of gravitation:
 
-Substituting this into the centripetal force equation gives:
+$$ F = \frac{G M m}{r^2} $$
 
-$$ \frac{GMm}{r^2} = \frac{m(2\pi r)^2}{r} $$
+where ( G ) is the gravitational constant.
 
-Simplifying leads to:
+The centripetal force required to keep the mass ( m ) in a circular orbit of radius ( r ) with orbital speed ( v ) is:
 
-$$ \fracGM}{r^2} = \frac{4\pi^2 m}{T^2} $$
+$$ = \frac{m v^2}{r} $$
 
-Rearranging gives:
+Setting these two for force equal gives:
 
-$$ T^2 = \frac{4\pi^2 r^3}{GM} $$
+$$ \frac{G M m}{r^2} = \frac{m v^2}{r} $$
 
-This shows that the square of the orbital period is proportional to the cube of the orbital radius.
+Cancelling m ) (assuming ( m \neq 0 )) and rearranging yields:
 
-2. Implications for Astronomy
-Calculating Planetary Masses: By observing the orbital period and radius of a satellite or planet, we can calculate the mass of the central body using the rearranged formula: $$ M = \frac{4\pi^2 r^3}{G T^2} $$
+$$ ^2 = \frac{G M}{r} $$
 
-Understanding Orbital Dynamics: Kepler's Third Law helps us understand the dynamics of planetary systems, including the relationships between different planets and their distances from the Sun.
+The orbital period ( T ) is related to the orbital speed ( v ) and the circumference of the orbit:
 
-3. Real-World Examples
-Moon's Orbit Around Earth: The average distance from the Earth to the Moon is about (3.84 \times 10^8) meters, and the orbital period is approximately 27.3 days. Using Kepler's Third Law, can verify the relationship.
+$$ T = \frac{2 \pi r}{v} $$
 
-Planets in the Solar System: The relationship holds for all planets, with the outer planets having longer periods and larger radii.
+Substituting ( v ) from the previous equation into this expression gives:
 
-4. Computational Model
-We will implement a Python script to simulate circular orbits and verify Kepler's Third Law. The script will calculate the orbital period for radii and plot the results.
+$$ T = 2 \pi r \sqrt{\frac{r}{G M}} = 2 \pi \sqrt{\frac{r^3}{G M}} $$
 
-Python Code
+aring both sides results in:
+
+$$ T^2 = \frac{4 \pi^2}{G M} r^3 $$
+
+This confirms that ( T^2 \propto r^3 ), establishing Kepler's Third Law.
+
+Implications for Astronomy
+Calculating Planetary Masses and Distances
+Kepler's Third Law allows astronomers to determine the mass of celestial bodies by observing the orbital periods and radii of their satellites. For example, by observing the orbital period of a moon around a planet, one can rearrange the equation to solve for the planet's mass:
+
+$$ M = \frac{4 \pi^2 r^3}{G T^2} $$
+
+This relationship is crucial for understanding the dynamics of planetary systems and the gravitational interactions between bodies.
+
+Real-World Examples
+The Moon's Orbit Around Earth: The average distance from the Earth to the Moon is approximately 384,400 km, and its orbital period is about 27.3 days. Using Kepler's Third Law, we can verify the relationship and calculate the mass of the Earth.
+
+Orbits of Planets in the Solar System: The planets in our solar system follow Kepler's Third Law, allowing us to predict their orbital periods based on their distances from the Sun.
+
+Computational Model
+Below is a Python script that simulates circular orbits and verifies the relationship between the orbital period and radius.
+
+python
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Constants
-G = 6.674 * 10**-11  # Gravitational constant (m^3 kg^-1 s^-2)
-M_sun = 1.989 * 10**30  # Mass of the Sun (kg)
+G = 6.67430e-11  # Gravitational constant in m^3 kg^-1 s^-2
+M_sun = 1.989e30  # Mass of the Sun in kg
 
-def calculate_orbital_period(radius):
-    """
-    Calculate the orbital period for a given radius using Kepler's Third Law.
-    
-    Parameters:
-    -----------
-    radius : float
-        The orbital radius (in meters).
-    
-    Returns:
-    --------
-    float
-        The orbital period (in seconds).
-    """
-    T_squared = (4 * np.pi**2 * radius**3) / (G * M_sun) # Added = for assignment
-    T = np.sqrt(T_squared)  # Period in seconds # Added = for assignment
-    return T
+# Function to calculate orbital period
+def orbital_period(radius):
+    return 2 * np.pi * np.sqrt(radius**3 / (G * M_sun))
 
-# Define a range of orbital radii (in meters)
-radii = np.linspace(1e11, 1.5e12, 100)  # From 100 million km to 1.5 billion km
-
-# Calculate the corresponding orbital periods
-periods = np.array($$calculate_orbital_period(r) for r in radii$$)
-
-# periods from seconds to days for better interpretation
-periods_days = periods / (24 * 3600)  # Convert seconds to days
+# Radii in meters (from 0.1 AU to 30 AU)
+radii = np.linspace(0.1 * 1.496e11, 30 * 1.496e11, 100)  # 1 AU = 1.496e11 m
+periods = orbital_period(radii)
 
 # Plotting the results
-plt.figure(figsize=(12, 8)) # Added comma in figsize
-
-# 1. Orbital Period vs. Orbital Radius
-plt.subplot(2, 2, 1)
-plt.plot(radii / 1e9, periods_days, label='Orbital Period', color='blue')  # Convert radius to billion meters
-plt.xlabel('Orbital Radius (billion meters)')
-plt.ylabel('Orbital Period (days)')
+plt.figure(figsize10, 6))
+plt.plot(radii / 1.496e11 periods / (24 * 3600), label='Orbital Period (days)', color='blue')
 plt.title('Orbital Period vs. Orbital Radius')
+plt.xlabel('Orbital Radius (AU)')
+plt.ylabel('Orbital Period (days)')
+plt.xscale('log')
+plt.yscale('log')
 plt.grid()
 plt.legend()
-plt.tight_layout()
+plt.show()
+![alt text](image-2.png)
+Graphical Representation
+The plot generated by the above code show the relationship between the orbital radius (in astronomical units) and the orbital period (in days) on a logarithmic scale, illustrating the ( T^2 \propto r^3 ) relationship.
 
-# 2. T^2 vs. r^3 to verify Kepler's Third Law
-T_squared = periods**2
-r_cubed = radii**3 # Corrected variable name to radii
+Additional Code for Simulating Circular Orbits
+We will extend the previous code to include multiple celestial bodies, such as the planets in our Solar System, and plot their orbital periods against their distances from the Sun.
+import numpy as np
+import matplotlib.pyplot as plt
 
-plt.subplot(2, 2, 2)
-plt.plot(r_cubed / 1e36, T_squared / 1e12, label='T^2 vs. r^3', color='orange')  # Convert to trillion m^3 and trillion s^2 # Added plt.
-plt.xlabel('Orbital Radius Cubed (trillion m^3)') # Corrected spelling for Cubed
-plt.ylabel('Orbital Period Squared (trillion s^2)')
-plt.title('Verification of Kepler\'s Third Law')
+# Constants
+G = 6.67430e-11  # Gravitational constant in m^3 kg^-1 s^-2
+M_sun = 1.989e30  # Mass of the Sun in kg
+
+# Function to calculate orbital period
+def orbital_period(radius):
+    return 2 * np.pi * np.sqrt(radius**3 / (G * M_sun))
+
+# Radii in meters (from 0.1 AU to 30 AU)
+radii = np.linspace(0.1 * 1.496e11, 30 * 1.496e11, 100)  # 1 AU = 1.496e11 m
+periods = orbital_period(radii)
+
+# Plotting the relationship between radius and period
+plt.figure(figsize=(10, 6))
+plt.plot(radii / 1.496e11, periods / (24 * 3600), label='Orbital Period (days)', color='blue')
+plt.title('Orbital Period vs. Orbital Radius')
+plt.xlabel('Orbital Radius (AU)')
+plt.ylabel('Orbital Period (days)')
+plt.xscale('log')
+plt.yscale('log')
 plt.grid()
 plt.legend()
-plt.tight_layout()
-
-# 3. Gravitational Force vs. Centripetal Force
-gravitational_forces = G * M_sun / radii**2
-centripetal_forces = (M_sun * (2 * np.pi * radii / periods)**2) / radii
-
-plt.subplot(2, 2, 3)
-plt.plot(radii / 1e9, gravitational_forces, label='Gravitational Force', color='green') # Continued the line
-plt.plot(radii / 1e9, centripetal_forces, label='Centripetal Force', color='red') # Continued the line
-plt.xlabel('Orbital Radius (billion meters)')
-plt.ylabel('Force (N)')
-plt.title('Gravitational Force vs. Centripetal Force')
-plt.legend()
-plt.grid()
-plt.tight_layout()
-
-# 4. Orbital Speed vs. Orbital Radius
-orbital_speeds = (2 * np.pi * radii) / periods
-
-plt.subplot(2, 2, 4)
-plt.plot(radii / 1e9, orbital_speeds, label='Orbital Speed', color='purple')
-plt.xlabel('Orbital Radius (billion meters)')
-plt.ylabel('Orbital Speed (m/s)')
-plt.title('Orbital Speed vs. Orbital Radius')
-plt.grid()
-plt.legend()
-plt.tight_layout()
-
 plt.show()
 
-# Additional Analysis: Calculate the mass of the Sun using Kepler's Third Law
-def calculate_mass(radius, period):
-    """
-    Calculate the mass of the central body using Kepler's Third Law.
-    
-    Parameters:
-    -----------
-    radius : float
-        The orbital radius (in meters).
-    period : float
-        The orbital period (in seconds).
-    
-    Returns:
-    --------
-    float
-        The mass of the central body (in kg).
-    """
-    T_squared = period**2
-    mass = (4 * np.pi**2 * radius**3) / (G * T_squared)
-    return mass
+# Data for planets in the Solar System
+planet_names = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+planet_radii = np.array([0.39, 0.72, 1.0, 1.52, 5.2, 9.58, 19.22, 30.07])  # in AU
+planet_periods = orbital_period(planet_radii * 1.496e11) / (24 * 3600  # Convert to days
 
-# Calculate the mass of the Sun using the average radius of Earth's orbit
-earth_radius = 1.496 * 10**11  # Average distance from Earth to Sun (in meters)
-earth_period = 365.25 * 24 * 3600  # Orbital period of Earth (in seconds)
+# Plotting the planets
+plt.figure(figsize=(10, 6))
+plt.scatter(planet_radii, planet_periods, color='red', label='ets')
+for i, name in enumerate(planet_names):
+    plt.annotate(name, (planet_radii[i], planet_periods[i]), textcoords="offset points", xytext=(0,10), ha='center')
 
-mass_sun = calculate_mass(earth_radius, earth_period)
-print(f"Calculated mass of the Sun: {mass_sun:.2e} kg")
-!$$alt text$$(image.png)
+plt.title('Orbital Period of Planets in the Solar System')
+plt.xlabel('Orbital Radius (AU)')
+plt.ylabel('Orbital Period (days)')
+plt.xscale('log')
+plt.yscale('log')
+plt.grid()
+plt.legend()
+plt.show()
+![alt text](image-3.png)
+Discussion on Elliptical Orbits
+While Kepler's Third Law is derived for circular orbits, it also applies to elliptical orbits. The semi-major axis of the ellipse can be used in place of the radius, and the law holds true. The relationship remains valid for all celestial bodies, including satellites, moons, and planets, regardless of the shape of their orbits.
+
+Conclusion
+Kepler's Third Law provides a fundamental understanding of the relationship between orbital period and radius, with significant implications for astronomy and celestial mechanics. By analyzing this relationship, we can gain insights into the dynamics of planetary systems and the gravitational interactions that govern them. The computational model further validates this relationship, demonstrating its applicability to real-world scenarios.
