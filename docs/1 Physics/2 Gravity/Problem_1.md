@@ -1,12 +1,12 @@
 # Problem 1
 1. Derivation of Kepler's Third Law
-Kepler's Third Law states: [ T^2 \propto r^3 ] Where:
+Kepler's Third Law states: $$ T^2 \propto r^3 $$ Where:
 
 (T) is the orbital period,
 (r) is the orbital radius.
 Derivation: For a body in circular orbit around a central mass (M), the gravitational force provides the necessary centripetal force:
 
-[ \frac{GMm}{r^2} = \frac{mv^2}{r} ]
+$$ \frac{GMm}{r^2} = \frac{mv^2}{r} $$
 
 Where:
 
@@ -15,24 +15,24 @@ Where:
 (v) is the orbital speed.
 The orbital speed can be expressed in terms of the orbital period (T):
 
-[ v = \frac{2\pi r}{T} ]
+$$ v = \frac{2\pi r}{T} $$
 
 Substituting this into the centripetal force equation gives:
 
-[ \frac{GMm}{r^2} = \frac{m(2\pi r)^2}{r} ]
+$$ \frac{GMm}{r^2} = \frac{m(2\pi r)^2}{r} $$
 
 Simplifying leads to:
 
-[ \fracGM}{r^2} = \frac{4\pi^2 m}{T^2} ]
+$$ \fracGM}{r^2} = \frac{4\pi^2 m}{T^2} $$
 
 Rearranging gives:
 
-[ T^2 = \frac{4\pi^2 r^3}{GM} ]
+$$ T^2 = \frac{4\pi^2 r^3}{GM} $$
 
 This shows that the square of the orbital period is proportional to the cube of the orbital radius.
 
 2. Implications for Astronomy
-Calculating Planetary Masses: By observing the orbital period and radius of a satellite or planet, we can calculate the mass of the central body using the rearranged formula: [ M = \frac{4\pi^2 r^3}{G T^2} ]
+Calculating Planetary Masses: By observing the orbital period and radius of a satellite or planet, we can calculate the mass of the central body using the rearranged formula: $$ M = \frac{4\pi^2 r^3}{G T^2} $$
 
 Understanding Orbital Dynamics: Kepler's Third Law helps us understand the dynamics of planetary systems, including the relationships between different planets and their distances from the Sun.
 
@@ -74,7 +74,7 @@ def calculate_orbital_period(radius):
 radii = np.linspace(1e11, 1.5e12, 100)  # From 100 million km to 1.5 billion km
 
 # Calculate the corresponding orbital periods
-periods = np.array([calculate_orbital_period(r) for r in radii])
+periods = np.array($$calculate_orbital_period(r) for r in radii$$)
 
 # periods from seconds to days for better interpretation
 periods_days = periods / (24 * 3600)  # Convert seconds to days
@@ -160,4 +160,4 @@ earth_period = 365.25 * 24 * 3600  # Orbital period of Earth (in seconds)
 
 mass_sun = calculate_mass(earth_radius, earth_period)
 print(f"Calculated mass of the Sun: {mass_sun:.2e} kg")
-![alt text](image.png)
+!$$alt text$$(image.png)

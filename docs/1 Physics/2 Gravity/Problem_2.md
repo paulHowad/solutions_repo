@@ -1,83 +1,52 @@
-# Problem 2
-Definitions of Cosmic Velocities
-Escape Velocity ((v_e)): The minimum velocity an object must reach to break free from a celestial body's gravitational pull without any further propulsion. It is given by the formula: [ v_e = \sqrt{\frac{2GM}{r}} ] Where:
+Here are the key equations related to a simple pendulum, assuming small-angle approximations (where the swing isn’t too wild, so the motion stays roughly harmonic). These come from basic physics principles, and I’ll keep them straightforward with explanations.
 
-(G) is the gravitational constant ((6.674 \times 10^{-11} , \text{m}^3 , \text{kg}^{-1} , \text{s}^{-2})),
-(M) is the mass of the celestial body,
-(r) is the radius of the celestial body.
-First Cosmic Velocity ((v_1)): The velocity required to maintain a low Earth orbit (LEO). It is approximately: [ v_1 = \sqrt{\frac{GM}{r}} ]
+1. **Period of a Pendulum (T)**  
+   This is the time it takes for one complete swing (back and forth).  
+   \[
+   T = 2\pi \sqrt{\frac{L}{g}}
+   \]
+   - \(T\): Period (in seconds)  
+   - \(L\): Length of the pendulum (in meters, from pivot to the center of the bob)  
+   - \(g\): Acceleration due to gravity (approximately \(9.8 \, \text{m/s}^2\ on Earth)  
+   - The \(2\pi\) comes from the circular nature of the motion.  
+   *Example*: A 1-meter-long pendulum on Earth has a period of about 2 seconds.
 
-Second Cosmic Velocity ((v_2)): The escape velocity from the surface of a celestial body, as defined above.
+2. **Frequency (f)**  
+   Frequency is how many swings happen per second, the inverse of the period.  
+   \[
+   f = \frac{1}{T} = \frac{1}{2\pi} \sqrt{\frac{g}{L}}
+   \]
+   - \(f\): Frequency (in hertz, or cycles per second)  
+   - Same variables as above.  
+   *Example*: That 1-meter pendulum has a frequency of about 0.5 Hz.
 
-Third Cosmic Velocity ((v_3)): The velocity required to the gravitational influence of a star system (e.g., the Solar System). It can be approximated as: [ v_3 = \sqrt{2GM_{\text{sun}} \left( \frac{1}{r} - \frac{1}{R} \right)} ] Where:
+3. **Angular Displacement (θ)**  
+   For a pendulum released from a small angle, its position over time can be described with:  
+   \[
+   \theta(t) = \theta_0 \cos(\omega t)
+   \]
+   - \(\theta(t)\): Angle from vertical at time \(t\) (in radians)  
+   - \(\theta_0\): Initial angle (how far you pull it back)  
+   - \(\omega\): Angular frequency, where \(\omega = \sqrt{\frac{g}{L}}\) (in radians per second)  
+   - \(t\): Time (in seconds)  
+   - This assumes no friction; it’s a cosine wave because the motion is oscillatory.
 
-(M_{\text{sun}}) is the mass of the Sun,
-(R) is the distance from the Sun to the celestial body.
-2 Derivations and Parameters
-The escape velocity depends on the mass and radius of the celestial body. The first cosmic velocity is influenced by the same parameters but is lower than the escape velocity. The third cosmic velocity depends on the gravitational influence of the Sun and the distance from it.
+4. **Velocity (v)**  
+   The speed of the bob at any point depends on its position. Maximum velocity occurs at the bottom:  
+   \[
+   v_{\text{max}} = \sqrt{2gL (1 - \cos\theta_0)}
+   \]
+   - \(v_{\text{max}}\): Maximum velocity (in meters per second)  
+   - Derived from energy conservation (potential energy at the top turns into kinetic energy at the bottom).  
+   *Example*: Pull a 1-meter pendulum to a 10° angle (small enough for approximations), and \(v_{\text{max}} \approx 0.66 \, \text{m/s}\).
 
-3. Python Code for Calculating and Visualizing Velocities
-Below is a Python script that calculates and visualizes the escape velocities and cosmic velocities for Earth, Mars, and Jupiter.
-import numpy as np
-import matplotlib.pyplot as plt
+5. **Acceleration (a)**  
+   The tangential acceleration depends on the angle:  
+   \[
+   a = -g \sin\theta
+   \]
+   - \(a\): Acceleration along the arc (in meters per second squared)  
+   - Negative because it’s a restoring force, pulling the bob back to the center.  
+   - For small angles, \(\sin\theta \approx \theta\), simplifying the motion to harmonic.
 
-# Constants
-G = 6.674 * 10**-11  # Gravitational constant (m^3 kg^-1 s^-2)
-M_sun = 1.989 * 10**30  # Mass of the Sun (kg)
-
-# Celestial bodies data: (name, mass (kg), radius (m), distance from Sun (m))
-celestial_bodies = {
-    'Earth': (5.972 * 10**24, 6.371 * 10**6, 1.496 * 10**11),
-    'Mars': (0.64171 * 10**24, 3.3895 * 10**6, 2.279 * 10**11),
-    'Jupiter': (1.898 * 10**27, 6.9911 * 10**7, 7.785 * 10**11)
-
-
-# Function to calculate escape velocity
-def escape_velocity(M, r):
-    return np.sqrt(2 * G * M / r)
-
-# Function to calculate first cosmic velocity
-def first_cosmic_velocity(M, r):
-    return np.sqrt(G * M / r)
-
-# Function to calculate third cosmic velocity
-def third_cosmic_velocity(M, r):
-    return np.sqrt(2 * G * M_sun * (1/r - 1/(r + 1.496 * 10**11)))  # Approximation
-
-# Store results
-results = {}
-
-for body, (mass, radius, distance) in celestial_bodies.items():
-    v_e = escape_velocity(mass, radius)
-    v_1 = first_cosmic_velocity(mass, radius)
-    v_3 = third_cosmic_velocity(mass, distance)
-    results[body] = (v_e, v_1, v_3)
-
-# Plotting the results
-labels = list(results.keys())
-escape_velocities = [results[body][0] for body in labels]
-first_cosmic_velocities = [results[body][1] for body in labels]
-third_cosmic_velocities = [results[body][2] for body in labels]
-
-x = np.arange(len(labels))  # the label locations
-
-plt.figure(figsize=(12, 6))
-plt.bar(x - 0.2, escape_velocities, width=0.2, label='Escape Velocity (m/s)', color='red')
-plt.bar(x, first_cosmic_velocities, width=0.2, label='First Cosmic Velocity (m/s)', color='blue')
-plt.bar(x + 0.2, third_cosmic_velocities, width=0.2, label='Third Cosmic Velocity (m/s)', color='green')
-
-# Add some text for labels, title and custom x-axis tick labels, etc.
-plt.xlabel('Celestial Bodies')
-plt.ylabel('Velocity (m/s)')
-plt.title('Escape and Cosmic Velocities for Different Celestial Bodies')
-plt.xticks(x, labels)
-plt.legend()
-plt.grid()
-plt.tight_layout()
-plt.show()
-
-# Print results
-for body, (v_e, v_1, v_3) in results.items():
-    print(f"{body}: Escape Velocity = {v_e:.2f} m/s, First Cosmic Velocity = {v_1:.2f} m/s, Third Cosmic Velocity = {v_3:.2f} m/s")
-
-![alt text](image-1.png)
+These equations assume an idealized pendulum—no air resistance, a massless string, and small swings. If you want equations for a real-world pendulum with damping or large angles, let me know, and I can dig into those too! Anything specific you’d like to calculate or explore with these?
