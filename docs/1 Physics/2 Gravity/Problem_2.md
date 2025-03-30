@@ -20,7 +20,7 @@ Where:
 2. Second Cosmic Velocity (Escape Velocity)
 The second cosmic velocity is the speed required to escape the gravitational influence of a celestial body. It can be derived from the conservation of energy principle:
 
-$ v_e = \sqrt{\frac{2GM}{r}} $
+$$ v_e = \sqrt{\frac{2GM}{r}}$$
 
 Where:
 
@@ -28,7 +28,7 @@ Where:
 3. Third Cosmic Velocity (Solar Escape Velocity)
 The third cosmic velocity is the speed required to escape the gravitational influence of the Sun. It can be calculated using the same formula as escape velocity, but considering the distance from the Sun:
 
-$ v_{se} = \sqrt{\frac{2GM_{sun}}{d}} $
+$$ v_{se} = \sqrt{\frac{2GM_{sun}}{d}} $$
 
 Where:
 
