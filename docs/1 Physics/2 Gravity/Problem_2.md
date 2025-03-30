@@ -9,7 +9,7 @@ Definitions and Mathematical Derivations
 1. First Cosmic Velocity (Orbital Velocity)
 The first cosmic velocity is the speed needed to achieve a stable orbit around a celestial body. For a circular orbit, it can be derived from the balance between gravitational force and centripetal force:
 
-$ v_o = \sqrt{\frac{GM}{r}} $
+$$ v_o = \sqrt{\frac{GM}{r}} $$
 
 Where:
 
@@ -88,7 +88,7 @@ escape_velocities = $results$body$$'escape_velocity'$ for body in labels$
 solar_escape_velocities_values = $solar_escape_velocities$body$ for body in labels$
 
 x = np.arange(len(labels))
-![alt text](image-4.png)
+!$$alt text](image-4.png)
 plt.figure(figsize=(12, 6))
 plt.bar(x - 0.2, orbital_velocities, width=0.2, label='Orbital Velocity (m/s)', color='blue')
 plt.bar(x, escape_velocities, width=0.2, label='Escape Velocity (m/s)', color='orange')
@@ -118,7 +118,7 @@ plt.grid()
 plt.legend()
 plt.show()
 Celestial Bodies Data: We create a dictionary containing the mass and radius of Earth, Mars, and Jupiter.
-![alt text](image-5.png)
+!$$alt text](image-5.png)
 Function calculate_velocities: This function calculates the orbital and escape velocities for a given mass and radius.
 
 Results Storage: We store the calculated velocities for each celestial body.
