@@ -185,8 +185,8 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<p>Introduction</p>
-<p>When a payload is released from a moving rocket near Earth, its subsequent trajectory is determined by its initial position, velocity, and the gravitational pull of the Earth. Depending on the initial conditions, the payload can follow:</p>
+<p>Introduction
+When a payload is released from a moving rocket near Earth, its subsequent trajectory is determined by its initial position, velocity, and the gravitational pull of the Earth. Depending on the initial conditions, the payload can follow:</p>
 <ul>
 <li><strong>Elliptical (or circular) orbits:</strong> if its kinetic energy is such that the total energy is negative.</li>
 <li><strong>Parabolic trajectories:</strong> the borderline case between bound and unbound orbits (zero total energy).</li>
@@ -433,7 +433,7 @@ plt.show()
 </li>
 </ol>
 <h4 id="graphical-representations-output">Graphical Representations (Output)</h4>
-<p><img alt="alt text" src="../image-12.png"/></p>
+<p><img alt="Payload Trajectories Near Earth" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/Payload200.png"/></p>
 <h4 id="output-explanation-scenario-1">Output Explanation (Scenario 1)</h4>
 <ul>
 <li>
@@ -547,7 +547,7 @@ plt.show()
    Normalizes the trajectories by Earth's radius to display Earth as a unit circle.</li>
 </ol>
 <h4 id="graphical-representations-output_1">Graphical Representations (Output)</h4>
-<p><img alt="alt text" src="../image-13.png"/></p>
+<p><img alt="alt text" src="../image-19.png"/></p>
 <h4 id="output-explanation-400-km-altitude">Output Explanation (400 km Altitude)</h4>
 <ul>
 <li><strong>Blue Circle (Earth):</strong><br/>
@@ -559,21 +559,174 @@ plt.show()
 <li><strong>Magenta Curve (Hyperbolic Trajectory):</strong><br/>
   The payload follows an escape trajectory, with slight differences due to the higher altitude.</li>
 </ul>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>bb0d5238dd312fd683986e00edae5eaf2b81fab3</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<hr/>
+<h2 id="exploring-the-oberth-effect-at-periapsis">Exploring the Oberth Effect at Periapsis</h2>
+<p>In this simulation, we compare two cases of a payload initially in an elliptical orbit having a periapsis at 300 km and an apogee at 600 km altitude. We consider:</p>
+<ul>
+<li><strong>Case 1 (No Burn):</strong> The payload follows the baseline elliptical orbit.</li>
+<li><strong>Case 2 (With Burn):</strong> At periapsis—where the payload is moving fastest—a small impulsive burn is applied (adding, for example, 100 m/s to the tangential velocity). This extra energy raises the apogee significantly, thereby demonstrating the Oberth effect.</li>
+</ul>
+<hr/>
+<h2 id="python-code">Python Code</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Constants
+mu = 3.986004418e14   # Earth's gravitational parameter (m^3/s^2)
+R_earth = 6.371e6     # Earth's radius (m)
+
+# Define orbital parameters for the elliptical orbit:
+# Periapsis at 300 km and Apogee at 600 km altitude
+r_p = R_earth + 300e3  # Periapsis radius
+r_a = R_earth + 600e3  # Apogee radius
+
+# Compute the velocity at periapsis for the desired elliptical orbit.
+# The velocity at periapsis for an ellipse is given by:
+#    v_p = sqrt(2*mu*r_a / (r_p * (r_a + r_p)))
+v_p = np.sqrt(2 * mu * r_a / (r_p * (r_a + r_p)))
+
+# Define a small delta-V to be applied at periapsis (demonstrating the Oberth effect).
+delta_V = 100  # m/s
+
+# Define two cases:
+# Case 1: No burn (baseline elliptical orbit)
+# Case 2: Burn applied at periapsis (adds delta_V to the tangential speed)
+initial_state_no_burn = [r_p, 0, 0, v_p]         # Position at (r_p, 0), velocity (0, v_p)
+initial_state_burn    = [r_p, 0, 0, v_p + delta_V]  # Position at (r_p, 0), velocity increased
+
+# Define the dynamics using Newton's law of gravitation.
+def dynamics(t, state):
+    x, y, vx, vy = state
+    r = np.sqrt(x**2 + y**2)
+    ax = -mu * x / r**3
+    ay = -mu * y / r**3
+    return [vx, vy, ax, ay]
+
+# Event function to stop integration if the payload impacts Earth.
+def collision_event(t, state):
+    x, y, _, _ = state
+    return np.sqrt(x**2 + y**2) - R_earth
+collision_event.terminal = True
+collision_event.direction = -1
+
+# Time parameters
+t_span = (0, 6000)    # seconds - roughly a simulation window covering one or more orbits
+t_eval = np.linspace(t_span[0], t_span[1], 10000)
+
+# Simulate the trajectories for both cases.
+sol_no_burn = solve_ivp(dynamics, t_span, initial_state_no_burn, t_eval=t_eval,
+                        events=collision_event, rtol=1e-8)
+sol_burn = solve_ivp(dynamics, t_span, initial_state_burn, t_eval=t_eval,
+                     events=collision_event, rtol=1e-8)
+
+# Plotting the results
+plt.figure(figsize=(8, 8))
+# Draw Earth as a filled circle (normalized by Earth's radius).
+theta = np.linspace(0, 2*np.pi, 500)
+earth_x = np.cos(theta)
+earth_y = np.sin(theta)
+plt.fill(earth_x, earth_y, 'b', alpha=0.3, label="Earth")
+
+# Plot both trajectories (positions normalized by Earth's radius).
+plt.plot(sol_no_burn.y[0] / R_earth, sol_no_burn.y[1] / R_earth, 'g', label="No Burn (Baseline)")
+plt.plot(sol_burn.y[0] / R_earth, sol_burn.y[1] / R_earth, 'r', label="With Burn (ΔV = 100 m/s)")
+
+plt.xlabel("x (in Earth radii)")
+plt.ylabel("y (in Earth radii)")
+plt.title("Effect of an Impulsive Burn at Periapsis (Oberth Effect)")
+plt.legend(loc="upper right")
+plt.axis('equal')
+plt.grid()
+plt.show()
+</code></pre>
+<hr/>
+<h2 id="explanation-of-the-code">Explanation of the Code</h2>
+<ul>
+<li>
+<p><strong>Orbital Parameters and Initial Conditions:</strong> </p>
+<ul>
+<li><strong>Altitudes:</strong><br/>
+The periapsis is set at 300 km and the apogee at 600 km above Earth’s surface. These values are converted into radii by adding them to Earth's radius.</li>
+<li><strong>Periapsis Velocity Calculation:</strong><br/>
+The velocity at periapsis is computed with:
+$$
+v_p = \sqrt{\frac{2\mu \, r_a}{r_p (r_a + r_p)}}
+$$
+This calculation ensures that the baseline elliptical orbit will have the specified periapsis and apogee.</li>
+<li><strong>Impulsive Burn:</strong><br/>
+A delta‑<span class="arithmatex">\(V\)</span> of 100 m/s is applied at periapsis for the second case. Two initial state vectors are defined:</li>
+<li><strong>No Burn (Baseline):</strong> <span class="arithmatex">\([r_p, 0, 0, v_p]\)</span></li>
+<li><strong>With Burn:</strong> <span class="arithmatex">\([r_p, 0, 0, v_p + \Delta V]\)</span></li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamics and Numerical Integration:</strong> </p>
+<ul>
+<li><strong>Dynamics Function:</strong><br/>
+The <code>dynamics</code> function calculates the acceleration using Newton’s law of gravitation:
+$$
+\ddot{x} = -\frac{\mu x}{r^3}, \quad \ddot{y} = -\frac{\mu y}{r^3}
+$$</li>
+<li><strong>Event Function:</strong><br/>
+The <code>collision_event</code> function halts the integration if the payload reaches Earth's surface (i.e., when  <span class="arithmatex">\(r = R_{\text{earth}}\)</span>).</li>
+<li><strong>Integration:</strong><br/>
+Both trajectories are simulated over a 6000-second window using <code>solve_ivp</code> with a tight relative tolerance of <span class="arithmatex">\(1 \times 10^{-8}\)</span> to ensure accuracy.</li>
+</ul>
+</li>
+<li>
+<p><strong>Plotting:</strong> </p>
+<ul>
+<li><strong>Earth Representation:</strong><br/>
+Earth is plotted as a blue filled circle after normalizing positions by Earth's radius, so it appears as a unit circle.</li>
+<li><strong>Trajectory Plotting:</strong><br/>
+The baseline elliptical orbit (no burn) is plotted in green, and the orbit after the impulsive burn is plotted in red.</li>
+<li><strong>Additional Plot Elements:</strong><br/>
+Labels for the axes, a title, and a legend are included to clarify the two different scenarios.</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<h2 id="output-image">Output Image</h2>
+<p>Below is a representative sample output image from the simulation:</p>
+<h2 id="_1"><img alt="alt text" src="../image-18.png"/></h2>
+<h2 id="explanation-of-the-output">Explanation of the Output</h2>
+<ol>
+<li>
+<p><strong>Visualization Context:</strong> </p>
+<ul>
+<li><strong>Normalized Display:</strong><br/>
+ The plot displays Earth as a blue filled unit circle since all distances are normalized by Earth's radius.</li>
+<li><strong>Starting Point:</strong><br/>
+ The simulation begins at a periapsis of 300 km (roughly <span class="arithmatex">\(1.05\,R_{\text{earth}}\)</span>), which places the orbits near Earth’s surface on the normalized scale.</li>
+</ul>
+</li>
+<li>
+<p><strong>Baseline Orbit (No Burn):</strong> </p>
+<ul>
+<li><strong>Green Curve:</strong><br/>
+ The green curve represents the elliptical orbit with a periapsis at 300 km and an apogee at 600 km. This orbit follows the intended path without any modifications.</li>
+</ul>
+</li>
+<li>
+<p><strong>Orbit with Impulsive Burn (Oberth Effect):</strong> </p>
+<ul>
+<li><strong>Red Curve:</strong><br/>
+ The red curve shows the orbit after a 100 m/s impulsive burn is applied at periapsis.</li>
+<li><strong>Effect of the Burn:</strong><br/>
+ The burn, performed at the point of highest orbital speed, efficiently increases the orbital energy due to the Oberth effect. This results in a significantly higher apogee compared to the baseline elliptical orbit.</li>
+<li><strong>Visual Distinction:</strong><br/>
+ Although the altitude differences are small relative to Earth's overall size, the divergence between the red and green curves clearly illustrates the impact of the impulsive burn.</li>
+</ul>
+</li>
+<li>
+<p><strong>General Observations:</strong> </p>
+<ul>
+<li>The simulation demonstrates that impulsive burns executed at periapsis are highly effective, as the added delta‑<span class="arithmatex">\(V\)</span> results in a markedly altered orbit with a raised apogee.</li>
+<li>Modifying the value of <span class="arithmatex">\(\Delta V\)</span> or changing the orbital parameters would result in more pronounced visual differences.</li>
+</ul>
+</li>
+</ol>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
