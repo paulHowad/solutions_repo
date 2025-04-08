@@ -1,3 +1,4 @@
+
 Introduction
  
 When a payload is released from a moving rocket near Earth, its subsequent trajectory is determined by its initial position, velocity, and the gravitational pull of the Earth. Depending on the initial conditions, the payload can follow:
@@ -420,3 +421,5 @@ plt.show()
 - **Magenta Curve (Hyperbolic Trajectory):**  
   The payload follows an escape trajectory, with slight differences due to the higher altitude.
  
+
+>>>>>>> bb0d5238dd312fd683986e00edae5eaf2b81fab3
