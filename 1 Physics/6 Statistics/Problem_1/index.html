@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Exploring the Central Limit Theorem through Simulations - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Exploring the Central Limit Theorem through Simulations";
         var mkdocs_page_input_path = "1 Physics/6 Statistics/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -82,11 +82,45 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">6 Statistics</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Exploring the Central Limit Theorem through Simulations</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-and-analysis">Implementation and Analysis</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-simulating-population-distributions">1. Simulating Population Distributions</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#output-population-distributions">Output: Population Distributions</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-sampling-and-visualization">2. Sampling and Visualization</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#output-sampling-and-visualization">Output: Sampling and Visualization</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-parameter-exploration-convergence-analysis">3. Parameter Exploration: Convergence Analysis</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#output-convergence-analysis">Output: Convergence Analysis</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-variance-impact-analysis">4. Variance Impact Analysis</a>
+</li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
+<li class="toctree-l3"><a class="reference internal" href="#output-variance-impact-analysis">Output: Variance Impact Analysis</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#discussion-and-practical-applications">Discussion and Practical Applications</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#key-findings">Key Findings</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#practical-applications">Practical Applications</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations-and-considerations">Limitations and Considerations</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Estimating π using Monte Carlo Methods</a>
 </li>
 </ul>
 </li>
@@ -163,7 +197,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">6 Statistics</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Exploring the Central Limit Theorem through Simulations</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,12 +205,537 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="exploring-the-central-limit-theorem-through-simulations">Exploring the Central Limit Theorem through Simulations</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The Central Limit Theorem (CLT) is a fundamental concept in probability theory and statistics that describes the behavior of the sampling distribution of the mean. According to the CLT, as the sample size increases, the sampling distribution of the sample mean approaches a normal distribution, regardless of the original population distribution's shape. This remarkable property holds true even when the underlying population distribution is non-normal.</p>
+<p>This document explores the Central Limit Theorem through computational simulations, visualizing how sampling distributions evolve toward normality as sample sizes increase.</p>
+<h2 id="implementation-and-analysis">Implementation and Analysis</h2>
+<h3 id="1-simulating-population-distributions">1. Simulating Population Distributions</h3>
+<p>We'll begin by generating large datasets from different types of distributions to represent our populations:
+- Uniform distribution (flat probability across a range)
+- Exponential distribution (skewed with a long tail)
+- Binomial distribution (discrete, representing count data)</p>
+<pre><code class="language-python">import os
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Print current working directory
+print("Current working directory:", os.getcwd())
+
+# For reproducibility
+np.random.seed(42)
+
+# Aesthetic parameters
+plt.style.use('seaborn-v0_8-whitegrid')
+sns.set_palette("viridis")
+
+# Population size
+population_size = 100_000
+
+# 1. Uniform Distribution (0,1)
+uniform_population = np.random.uniform(0, 1, population_size)
+# 2. Exponential Distribution (λ = 1)
+exponential_population = np.random.exponential(scale=1.0, size=population_size)
+# 3. Binomial Distribution (n=10, p=0.3)
+binomial_population = np.random.binomial(n=10, p=0.3, size=population_size)
+
+# Helper function to plot one distribution, save, show, then close
+def plot_and_show(data, title, filename, color):
+    mean = np.mean(data)
+    median = np.median(data)
+    print(f"\n{title} → mean={mean:.4f}, median={median:.4f}, std={np.std(data):.4f}")
+
+    plt.figure(figsize=(8, 6))
+    sns.histplot(data, kde=True, stat='density', bins=50, color=color)
+    plt.title(title, fontsize=16)
+    plt.axvline(mean, color='red', linestyle='--', linewidth=2, label=f"Mean = {mean:.4f}")
+    plt.axvline(median, color='green', linestyle='--', linewidth=2, label=f"Median = {median:.4f}")
+    plt.legend()
+    plt.tight_layout()
+
+    plt.savefig(filename, dpi=300)
+    print(f"Saved plot to: {os.path.abspath(filename)}")
+
+    plt.show()
+    plt.close()
+
+# Plot each distribution one by one
+plot_and_show(
+    uniform_population,
+    "Uniform Distribution (0, 1)",
+    "uniform_distribution.png",
+    color='blue'
+)
+
+plot_and_show(
+    exponential_population,
+    "Exponential Distribution (λ = 1)",
+    "exponential_distribution.png",
+    color='purple'
+)
+
+plot_and_show(
+    binomial_population,
+    "Binomial Distribution (n=10, p=0.3)",
+    "binomial_distribution.png",
+    color='orange'
+)
+</code></pre>
+<h3 id="output-population-distributions">Output: Population Distributions</h3>
+<p><img alt="alt text" src="../image.png"/></p>
+<p><em>Figure 1: Histogram and KDE of 100 000 draws from a Uniform(0,1) population. The red dashed line marks the empirical mean (~0.500), and the green dashed line marks the median (~0.500), illustrating the flat shape with equal probability across [0,1].</em></p>
+<p><img alt="alt text" src="../image-1.png"/></p>
+<p><em>Figure 2: Histogram and KDE of 100 000 draws from an Exponential(λ=1) population. Note the pronounced right skew and long tail. The red dashed line shows the empirical mean (~1.005), and the green dashed line shows the median (~0.693).</em></p>
+<p><img alt="alt text" src="../image-2.png"/></p>
+<p><em>Figure 3: Histogram and KDE of 100 000 draws from a Binomial(n=10, p=0.3) population. The discrete bars at integer values are visible. The red dashed line is the mean (~3.004), and the green dashed line is the median (3.000), reflecting the count‐data nature of this distribution.</em> </p>
+<h3 id="2-sampling-and-visualization">2. Sampling and Visualization</h3>
+<p>Next, we'll implement a sampling process where we:
+1. Randomly draw samples of different sizes from each population
+2. Calculate the sample mean for each draw
+3. Repeat this process many times to create a sampling distribution
+4. Visualize how these sampling distributions evolve as sample size increases</p>
+<pre><code class="language-python">import os
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# ----------------------------------------
+# Section 2: Sampling and Visualization
+# ----------------------------------------
+
+# Print current working directory
+print("Current working directory:", os.getcwd())
+
+# For reproducibility
+np.random.seed(42)
+
+# Aesthetic parameters
+plt.style.use('seaborn-v0_8-whitegrid')
+sns.set_palette("viridis")
+
+# Regenerate populations (if you ran Section 1 in a separate script, you can omit these)
+population_size = 100_000
+uniform_population     = np.random.uniform(0, 1, population_size)
+exponential_population = np.random.exponential(scale=1.0, size=population_size)
+binomial_population    = np.random.binomial(n=10, p=0.3, size=population_size)
+
+# Define the sample sizes and number of replicates
+sample_sizes = [5, 10, 30, 50]
+num_samples  = 5000
+
+def generate_sampling_distribution(population, sample_sizes, num_samples):
+    """Draw many samples of each size, return dict mapping n -&gt; array of sample means."""
+    distributions = {}
+    for n in sample_sizes:
+        means = [
+            np.mean(np.random.choice(population, size=n, replace=True))
+            for _ in range(num_samples)
+        ]
+        distributions[n] = np.array(means)
+    return distributions
+
+# Generate sampling distributions for each population
+print("\nGenerating sampling distributions...")
+uniform_samps     = generate_sampling_distribution(uniform_population,     sample_sizes, num_samples)
+exponential_samps = generate_sampling_distribution(exponential_population, sample_sizes, num_samples)
+binomial_samps    = generate_sampling_distribution(binomial_population,    sample_sizes, num_samples)
+print("Done.\n")
+
+def plot_and_show_sampling(samp_dist, population, title, filename, color):
+    """Plot 2×2 grid of sampling distributions for each n, save &amp; show sequentially."""
+    pop_mean = np.mean(population)
+    pop_std  = np.std(population)
+
+    fig, axes = plt.subplots(2, 2, figsize=(14, 12))
+    axes = axes.flatten()
+
+    for ax, n in zip(axes, sample_sizes):
+        means = samp_dist[n]
+        se = pop_std / np.sqrt(n)
+
+        sns.histplot(means, kde=True, stat="density", ax=ax, color=color, bins=30)
+        # Overlay theoretical normal curve
+        x = np.linspace(means.min(), means.max(), 500)
+        ax.plot(x, stats.norm.pdf(x, loc=pop_mean, scale=se),
+                'r-', linewidth=2, label='Theoretical Normal')
+
+        # Population mean line
+        ax.axvline(pop_mean, color='green', linestyle='--', linewidth=2,
+                   label=f'Pop Mean = {pop_mean:.4f}')
+
+        # Compute diagnostics
+        mean_of_means = means.mean()
+        std_of_means  = means.std()
+        skewness      = stats.skew(means)
+        kurtosis      = stats.kurtosis(means)
+
+        # Annotate
+        ax.text(0.05, 0.95,
+                f"n = {n}\n"
+                f"Mean of Means: {mean_of_means:.4f}\n"
+                f"Std of Means:  {std_of_means:.4f}\n"
+                f"Expected SE:   {se:.4f}\n"
+                f"Skewness:      {skewness:.4f}\n"
+                f"Kurtosis:      {kurtosis:.4f}",
+                transform=ax.transAxes, va='top',
+                bbox=dict(facecolor='white', alpha=0.8))
+
+        ax.set_title(f"Sampling Distribution (n={n})")
+        ax.legend()
+
+    plt.suptitle(title, fontsize=18)
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.92)
+
+    # Save and display
+    plt.savefig(filename, dpi=300)
+    print(f"Saved sampling plot to: {os.path.abspath(filename)}")
+    plt.show()
+    plt.close()
+
+# Plot and show each population in sequence
+plot_and_show_sampling(
+    uniform_samps,
+    uniform_population,
+    "Sampling Distributions of Means — Uniform Population",
+    "uniform_sampling_distributions.png",
+    color='blue'
+)
+
+plot_and_show_sampling(
+    exponential_samps,
+    exponential_population,
+    "Sampling Distributions of Means — Exponential Population",
+    "exponential_sampling_distributions.png",
+    color='purple'
+)
+
+plot_and_show_sampling(
+    binomial_samps,
+    binomial_population,
+    "Sampling Distributions of Means — Binomial Population",
+    "binomial_sampling_distributions.png",
+    color='orange'
+)
+
+print("\nSection 2 complete! Three figures have been displayed and saved.")
+</code></pre>
+<h3 id="output-sampling-and-visualization">Output: Sampling and Visualization</h3>
+<p><img alt="alt text" src="../image-3.png"/></p>
+<p><em>Figure 4: Four histograms (n=5, 10, 30, 50) of sample‐means drawn from the Uniform(0,1) population. As <span class="arithmatex">\(n\)</span> increases, the distribution of the sample mean becomes more tightly clustered around the population mean <span class="arithmatex">\((~0.5)\)</span> and more closely matches the overlaid normal curve. Note the decrease in spread (standard error) and the skew/kurtosis approaching 0.</em></p>
+<p><img alt="alt text" src="../image-4.png"/></p>
+<p><em>Figure 5: Sampling distributions of means from the <span class="arithmatex">\(Exponential(λ=1)\)</span> population. For small <span class="arithmatex">\(n\)</span> (e.g. 5), the sampling distribution retains some right skew; by <span class="arithmatex">\(n=50\)</span>, it is well‐approximated by a normal distribution centered at the population mean <span class="arithmatex">\((~1.0)\)</span>. The red curve is the CLT‐predicted normal with standard error <span class="arithmatex">\(\sigma/\sqrt{n}\)</span>.</em></p>
+<p><img alt="alt text" src="../image-5.png"/>
+<em>Figure 6: Sampling distributions of means from the Binomial(n=10, p=0.3) population. Even at <span class="arithmatex">\(n=5\)</span>, the sample‐mean distribution is fairly symmetric; by <span class="arithmatex">\(n=50\)</span>, it is almost indistinguishable from the theoretical normal curve. The mean of means converges to the true population mean (~3.0) and the spread shrinks as <span class="arithmatex">\(n\)</span> increases.</em></p>
+<h3 id="3-parameter-exploration-convergence-analysis">3. Parameter Exploration: Convergence Analysis</h3>
+<p>Let's investigate how different factors affect the convergence to normality. We'll quantify this by measuring how the sampling distribution's characteristics (like skewness and kurtosis) approach those of a normal distribution as sample size increases.</p>
+<pre><code class="language-python">import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# ----------------------------------------
+# Section 3: Parameter Exploration: Convergence Analysis
+# ----------------------------------------
+
+# Print current working directory
+print("Current working directory:", os.getcwd())
+
+# For reproducibility
+np.random.seed(42)
+
+# Aesthetic parameters
+plt.style.use('seaborn-v0_8-whitegrid')
+sns.set_palette("viridis")
+
+# (Re)generate populations
+population_size = 100_000
+uniform_population     = np.random.uniform(0, 1, population_size)
+exponential_population = np.random.exponential(scale=1.0, size=population_size)
+binomial_population    = np.random.binomial(n=10, p=0.3, size=population_size)
+
+# Detailed sample sizes and replicates
+detailed_sample_sizes = [2, 5, 10, 15, 20, 30, 50, 100]
+num_samples = 3000
+
+def generate_sampling_distribution(population, sample_sizes, num_samples):
+    """Return dict mapping each n to an array of sample means."""
+    d = {}
+    for n in sample_sizes:
+        means = [
+            np.mean(np.random.choice(population, size=n, replace=True))
+            for _ in range(num_samples)
+        ]
+        d[n] = np.array(means)
+    return d
+
+print("\nGenerating detailed sampling distributions...")
+uniform_detailed     = generate_sampling_distribution(uniform_population,     detailed_sample_sizes, num_samples)
+exponential_detailed = generate_sampling_distribution(exponential_population, detailed_sample_sizes, num_samples)
+binomial_detailed    = generate_sampling_distribution(binomial_population,    detailed_sample_sizes, num_samples)
+print("Done.\n")
+
+def calculate_sampling_statistics(sampling_distributions, population):
+    """Compute diagnostics for each sampling distribution."""
+    pop_std = np.std(population)
+    records = []
+    for n, means in sampling_distributions.items():
+        expected_se = pop_std / np.sqrt(n)
+        observed_se = means.std()
+        # Shapiro–Wilk p-value (subset if &gt;5000)
+        subset = means if len(means) &lt;= 5000 else np.random.choice(means, 5000, replace=False)
+        _, p_sw = stats.shapiro(subset)
+        records.append({
+            'Sample Size': n,
+            'Skewness': stats.skew(means),
+            'Kurtosis': stats.kurtosis(means),
+            'SE Ratio': observed_se / expected_se,
+            'Shapiro-Wilk p-value': p_sw
+        })
+    return pd.DataFrame(records)
+
+print("Calculating convergence statistics...")
+df_uni = calculate_sampling_statistics(uniform_detailed, uniform_population)
+df_uni['Distribution'] = 'Uniform'
+df_exp = calculate_sampling_statistics(exponential_detailed, exponential_population)
+df_exp['Distribution'] = 'Exponential'
+df_bin = calculate_sampling_statistics(binomial_detailed, binomial_population)
+df_bin['Distribution'] = 'Binomial'
+
+all_stats = pd.concat([df_uni, df_exp, df_bin], ignore_index=True)
+print("Done.\n")
+
+# Create 2×2 figure with constrained_layout to avoid overlaps
+fig, axes = plt.subplots(2, 2, figsize=(14, 12), constrained_layout=True)
+axes = axes.flatten()
+
+# 1. Skewness
+for dist in ['Uniform', 'Exponential', 'Binomial']:
+    sub = all_stats[all_stats['Distribution'] == dist]
+    axes[0].plot(sub['Sample Size'], sub['Skewness'], 'o-', label=dist)
+axes[0].axhline(0, linestyle='--', color='black', alpha=0.7)
+axes[0].set_xscale('log')
+axes[0].set_title('Convergence of Skewness')
+axes[0].set_xlabel('Sample Size')
+axes[0].set_ylabel('Skewness')
+axes[0].legend()
+axes[0].grid(alpha=0.3)
+
+# 2. Excess Kurtosis
+for dist in ['Uniform', 'Exponential', 'Binomial']:
+    sub = all_stats[all_stats['Distribution'] == dist]
+    axes[1].plot(sub['Sample Size'], sub['Kurtosis'], 'o-', label=dist)
+axes[1].axhline(0, linestyle='--', color='black', alpha=0.7)
+axes[1].set_xscale('log')
+axes[1].set_title('Convergence of Excess Kurtosis')
+axes[1].set_xlabel('Sample Size')
+axes[1].set_ylabel('Excess Kurtosis')
+axes[1].legend()
+axes[1].grid(alpha=0.3)
+
+# 3. SE Ratio
+for dist in ['Uniform', 'Exponential', 'Binomial']:
+    sub = all_stats[all_stats['Distribution'] == dist]
+    axes[2].plot(sub['Sample Size'], sub['SE Ratio'], 'o-', label=dist)
+axes[2].axhline(1, linestyle='--', color='black', alpha=0.7)
+axes[2].set_xscale('log')
+axes[2].set_title('Standard Error Ratio (Observed / Expected)')
+axes[2].set_xlabel('Sample Size')
+axes[2].set_ylabel('SE Ratio')
+axes[2].legend()
+axes[2].grid(alpha=0.3)
+
+# 4. Shapiro–Wilk p-value
+for dist in ['Uniform', 'Exponential', 'Binomial']:
+    sub = all_stats[all_stats['Distribution'] == dist]
+    axes[3].plot(sub['Sample Size'], sub['Shapiro-Wilk p-value'], 'o-', label=dist)
+axes[3].axhline(0.05, linestyle='--', color='red', alpha=0.7)
+axes[3].set_xscale('log')
+axes[3].set_yscale('log')
+axes[3].set_title('Shapiro–Wilk p-value')
+axes[3].set_xlabel('Sample Size')
+axes[3].set_ylabel('p-value')
+axes[3].legend()
+axes[3].grid(alpha=0.3)
+
+# Save and show
+output_file = 'convergence_analysis.png'
+fig.suptitle('Convergence Diagnostics for Sample Means', fontsize=18)
+fig.savefig(output_file, dpi=300)
+print(f"Saved plot to: {os.path.abspath(output_file)}")
+plt.show()
+plt.close()
+</code></pre>
+<h3 id="output-convergence-analysis">Output: Convergence Analysis</h3>
+<p><img alt="alt text" src="../image-6.png"/></p>
+<p><em>Figure 7: Four‐panel plot illustrating how the sampling distribution of the mean converges to normality as sample size increases.<br/>
+1. </em><em>Skewness</em><em> (top‐left) approaches 0.<br/>
+2. </em><em>Excess kurtosis</em><em> (top‐right) approaches 0.<br/>
+3. </em><em>Standard error ratio</em><em> (bottom‐left) converges to 1 (observed vs. theoretical SE).<br/>
+4. </em><em>Shapiro–Wilk p-value</em><em> (bottom‐right) rises above the 0.05 threshold, indicating normality for large <span class="arithmatex">\(n\)</span>.</em> </p>
+<h3 id="4-variance-impact-analysis">4. Variance Impact Analysis</h3>
+<p>Let's investigate how the population variance affects the sampling distribution:</p>
+<pre><code class="language-python">import os
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# ----------------------------------------
+# Section 4: Variance Impact Analysis
+# ----------------------------------------
+
+# Print current working directory
+print("Current working directory:", os.getcwd())
+
+# For reproducibility
+np.random.seed(42)
+
+# Aesthetic parameters
+plt.style.use('seaborn-v0_8-whitegrid')
+sns.set_palette("viridis")
+
+# 1. Create exponential populations with different variances
+#    Var(exponential) = 1 / λ²
+lambdas = [0.5, 1.0, 2.0]   # variances: 4, 1, 0.25
+population_size = 100_000
+
+variance_populations = {}
+for lam in lambdas:
+    variance_populations[lam] = np.random.exponential(scale=1/lam, size=population_size)
+
+# 2. Print expected vs. actual variances
+print("\nPopulation Variance Check:")
+for lam in lambdas:
+    expected_var = 1 / (lam ** 2)
+    actual_var   = np.var(variance_populations[lam])
+    print(f" λ = {lam:&lt;4} → Expected Var = {expected_var:.4f}, Actual Var = {actual_var:.4f}")
+
+# 3. Generate sampling distributions (fixed sample size)
+sample_size = 30
+num_samples = 5000
+
+variance_samp = {}
+for lam, pop in variance_populations.items():
+    means = [
+        np.mean(np.random.choice(pop, size=sample_size, replace=True))
+        for _ in range(num_samples)
+    ]
+    variance_samp[lam] = np.array(means)
+
+# 4. Plot KDEs of sample means for each λ
+plt.figure(figsize=(12, 8))
+for lam in lambdas:
+    pop      = variance_populations[lam]
+    means    = variance_samp[lam]
+    pop_std  = np.std(pop)
+    expected_se = pop_std / np.sqrt(sample_size)
+    label = f"λ={lam}, Var≈{1/lam**2:.2f}, SE≈{expected_se:.4f}"
+    sns.kdeplot(means, label=label, fill=False, linewidth=2)
+
+plt.title(f"Effect of Population Variance on Sampling Distribution (n={sample_size})", fontsize=16)
+plt.xlabel("Sample Mean")
+plt.ylabel("Density")
+plt.legend(title="Parameters")
+plt.grid(alpha=0.3)
+
+# 5. Save, show, and close
+output_file = "variance_impact.png"
+plt.tight_layout()
+plt.savefig(output_file, dpi=300)
+print(f"\nSaved plot to: {os.path.abspath(output_file)}")
+plt.show()
+plt.close()
+</code></pre>
+<h2 id="output-variance-impact-analysis">Output: Variance Impact Analysis</h2>
+<p><img alt="alt text" src="../image-7.png"/></p>
+<p>*Figure 8: KDEs of sample‐means (n=30) from Exponential populations with different rate parameters λ.</p>
+<ul>
+<li><strong>λ=0.5 (Var≈4.00, SE≈0.3626)</strong> produces the widest sampling distribution (purple curve).</li>
+<li><strong>λ=1.0 (Var≈1.00, SE≈0.1833)</strong> yields an intermediate spread (blue curve).</li>
+<li><strong>λ=2.0 (Var≈0.25, SE≈0.0916)</strong> gives the narrowest distribution (teal curve).
+  The curves confirm the CLT prediction that the standard error of the mean scales as <span class="arithmatex">\(\sigma/\sqrt{n}\)</span>.</li>
+</ul>
+<h2 id="discussion-and-practical-applications">Discussion and Practical Applications</h2>
+<h3 id="key-findings">Key Findings</h3>
+<p>From our simulations, we can observe several key properties of the Central Limit Theorem:</p>
+<ol>
+<li>
+<p><strong>Convergence to Normality</strong>: Regardless of the original population distribution (uniform, exponential, or binomial), the sampling distribution of the mean approaches a normal distribution as the sample size increases.</p>
+</li>
+<li>
+<p><strong>Rate of Convergence</strong>: The rate at which the sampling distribution approaches normality depends on:                                                </p>
+<ul>
+<li>The shape of the original population distribution                        </li>
+<li>The sample size                                                          </li>
+<li>The population variance                                                  </li>
+</ul>
+</li>
+<li>
+<p><strong>Standard Error Behavior</strong>: The standard error (standard deviation of the sampling distribution) decreases proportionally to √n, where n is the sample size, confirming the theoretical prediction from the CLT.</p>
+</li>
+<li>
+<p><strong>Distribution Shape Impact</strong>: More skewed distributions like the exponential require larger sample sizes to achieve normality compared to more symmetric distributions like the uniform.</p>
+</li>
+<li>
+<p><strong>Variance Effect</strong>: The higher the population variance, the wider the sampling distribution, affecting the precision of our estimates.</p>
+</li>
+</ol>
+<h3 id="practical-applications">Practical Applications</h3>
+<p>The Central Limit Theorem has numerous practical applications across various fields:</p>
+<h4 id="1-estimating-population-parameters">1. Estimating Population Parameters</h4>
+<p>In statistical inference, the CLT allows us to make probability statements about population parameters using sample statistics, even when we don't know the population distribution. This is fundamental in:</p>
+<ul>
+<li><strong>Polling and Surveys</strong>: When estimating public opinion, the CLT enables pollsters to calculate margins of error for their sample means.</li>
+<li><strong>Medical Research</strong>: When testing the effectiveness of treatments, researchers can apply CLT principles to determine if observed differences are statistically significant.</li>
+<li><strong>Economic Indicators</strong>: Government agencies use sample data to estimate economic indicators like unemployment rates, applying CLT to establish confidence intervals.</li>
+</ul>
+<h4 id="2-quality-control-in-manufacturing">2. Quality Control in Manufacturing</h4>
+<p>In industrial settings, the CLT is applied to:</p>
+<ul>
+<li><strong>Process Control</strong>: Manufacturers sample products to monitor quality, using the CLT to establish control limits for process parameters.</li>
+<li><strong>Acceptance Sampling</strong>: Quality inspectors test a small sample from a larger batch, relying on the CLT to make inferences about the entire batch's quality.</li>
+<li><strong>Reliability Engineering</strong>: Engineers use sampling to estimate component lifetimes and failure rates, applying the CLT to model uncertainty.</li>
+</ul>
+<h4 id="3-financial-modeling-and-risk-assessment">3. Financial Modeling and Risk Assessment</h4>
+<p>The financial sector heavily leverages the CLT for:</p>
+<ul>
+<li><strong>Portfolio Management</strong>: Investment returns are often modeled as normally distributed (per the CLT) when the portfolio contains many assets.</li>
+<li><strong>Value at Risk (VaR) Calculations</strong>: Risk managers use the CLT to estimate potential losses in investment portfolios.</li>
+<li><strong>Option Pricing</strong>: The Black-Scholes model for option pricing assumes normally distributed returns, which is justified by the CLT when considering many small price movements.</li>
+</ul>
+<h4 id="4-big-data-and-machine-learning">4. Big Data and Machine Learning</h4>
+<p>In data science applications:</p>
+<ul>
+<li><strong>Feature Engineering</strong>: The CLT helps data scientists understand how aggregated features behave, informing preprocessing decisions.</li>
+<li><strong>Bootstrap Methods</strong>: Resampling techniques rely on CLT principles to estimate parameter uncertainty.</li>
+<li><strong>Model Evaluation</strong>: Statistical tests for model comparison often rely on CLT assumptions.</li>
+</ul>
+<h3 id="limitations-and-considerations">Limitations and Considerations</h3>
+<p>While the CLT is powerful, it's important to recognize its limitations:</p>
+<ol>
+<li>
+<p><strong>Sample Size Requirements</strong>: For highly skewed distributions, larger sample sizes may be needed before the CLT applies effectively.</p>
+</li>
+<li>
+<p><strong>Independence Assumption</strong>: The CLT assumes independent observations, which may not hold in time series or spatially correlated data.</p>
+</li>
+<li>
+<p><strong>Finite Variance Requirement</strong>: For distributions with infinite variance (like the Cauchy distribution), the CLT doesn't apply in its standard form.</p>
+</li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>The Central Limit Theorem represents one of the most profound results in probability theory, providing a bridge between various probability distributions and enabling powerful statistical inference methods. Our simulations have demonstrated how the sampling distribution of the mean converges to normality as sample size increases, regardless of the underlying population distribution.</p>
+<p>This property is not just a mathematical curiosity but has far-reaching practical implications across countless fields. By understanding and applying the CLT appropriately, statisticians, researchers, and analysts can make reliable inferences about populations using sample data, quantify uncertainty, and make evidence-based decisions.</p>
+<p>The CLT stands as a testament to the elegant mathematical patterns that emerge when we study large numbers of random events - even when individual outcomes seem chaotic or unpredictable, their averages often display remarkable regularity and predictability.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
 <a class="btn btn-neutral float-left" href="../../5%20Circuits/Problem_1/" title="Problem 1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../Problem_2/" title="Problem 2">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-right" href="../Problem_2/" title="Estimating π using Monte Carlo Methods">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">
