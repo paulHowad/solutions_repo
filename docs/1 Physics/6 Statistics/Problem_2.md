@@ -197,13 +197,13 @@ The visualization shows random points distributed within a square, with points c
  
 ## Output: Circle‐Based Monte Carlo Method
  
-![Monte Carlo Circle Visualization](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20a%20Circle/circle_monte_carlo.png)
+![alt text](image-8.png)
  
 *Figure 1: Scatter plot of 5 000 random points in the square $[-1,1]^2$.  
 Green points lie inside the unit circle, red points lie outside.  
 Estimated $π ≈ 3.155200$ (error ≈ 0.013607).*
  
-![Convergence of π Estimate (Circle Method)](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20a%20Circle/circle_convergence.png)
+![alt text](image-9.png)
  
 *Figure 2 (left): $π$ estimates as a function of the number of random points (log scale). The dashed red line is the true $π$.*  
 *Figure 2 (right): Absolute error vs. number of points (both axes log scale), showing the expected $O(1/\sqrt{n})$ decline in error.*  
@@ -427,14 +427,13 @@ While conceptually elegant, Buffon's Needle typically converges more slowly than
  
 ## Output: Buffon’s Needle Experiment
  
-![Buffon's Needle Visualization](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20Buffon's%20Needle/buffon_needle.png)
+![alt text](image-10.png)
  
 *Figure 1: Buffon’s Needle experiment with 100 needles dropped on parallel lines spaced 1 unit apart.
 Red segments cross a line, blue segments do not.  
 Estimated $π ≈ 3.174603$ (63 crossings out of 100 needles).*
  
-![Convergence of π Estimate (Buffon’s Needle)](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20Buffon's%20Needle/buffon_convergence.png)
- 
+![alt text](image-11.png)
 *Figure 2 (left): Estimated $π$ vs. number of needles (log scale). The dashed red line shows true $π$.*  
 *Figure 2 (right): Absolute error vs. number of needles (both axes log scale), demonstrating roughly $O(1/\sqrt{n})$ error decay.*  
  
@@ -674,13 +673,13 @@ Both Monte Carlo methods converge to π as the number of samples increases, but 
  
 ### Circle‐Based Monte Carlo Method
  
-![Monte Carlo Circle Visualization](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Comparison%20of%20Methods/circle_monte_carlo.png)
+![alt text](image-12.png)
  
 *Figure 1: Scatter plot of 5 000 random points in the square $[-1,1]^2$.
 Green points lie inside the unit circle, red points lie outside.
 Estimated $π ≈ 3.126400$ (error ≈ 0.015193).*
  
-![Circle Convergence](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Comparison%20of%20Methods/circle_convergence.png)
+![alt text](image-13.png)
  
 *Figure 2 (left): $π$ estimates vs. number of points (log scale). The dashed red line marks true $π$.*
 *Figure 2 (right): Absolute error vs. number of points (both axes log–log), illustrating the $O(1/\sqrt{n})$ decline.*
@@ -689,23 +688,22 @@ Estimated $π ≈ 3.126400$ (error ≈ 0.015193).*
  
 ### Buffon’s Needle Experiment
  
-![Buffon’s Needle Visualization](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Comparison%20of%20Methods/buffon_needle.png)
+![alt text](image-14.png)
  
 *Figure 3: 100 needles dropped onto parallel lines.
 Red needles cross a line; blue do not.
 Estimated $π ≈ 2.985075$ $(error ≈ 0.156518)$.*
  
-![Buffon Convergence](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Comparison%20of%20Methods/buffon_convergence.png)
- 
+![alt text](image-15.png)
 *Figure 4 (left): π estimates vs. number of needles (log scale) converge slowly toward π.*
 *Figure 4 (right): Absolute error vs. number of needles (log–log), again showing roughly $O(1/\sqrt{n})$ behavior.*
  
 ---
  
 ### Comparison of Methods
- 
-![Method Comparison](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Comparison%20of%20Methods/method_comparison.png)
- 
+
+![alt text](image-17.png) 
+
 *Figure 5 (top‐left): Estimated π vs. sample size for both methods.*
 *Figure 5 (top‐right): Error vs. sample size with a 1/√n reference (dashed).*
 *Figure 5 (bottom‐left): Execution time vs. sample size.*
