@@ -172,6 +172,54 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<h1 id="estimating-pi-using-monte-carlo-methods">Estimating Pi Using Monte Carlo Methods</h1>
+<h2 id="motivation">Motivation</h2>
+<p>Monte Carlo simulations are a powerful computational technique that use randomness to solve problems or estimate values. One elegant application of Monte Carlo methods is estimating the value of <span class="arithmatex">\(\pi\)</span> using geometric probability. By randomly generating points and analyzing their positions relative to a geometric shape, we can approximate <span class="arithmatex">\(\pi\)</span> in an intuitive and visually engaging way.
+This method connects fundamental concepts in probability, geometry, and numerical computation. The Monte Carlo approach for estimating <span class="arithmatex">\(\pi\)</span> highlights the versatility and simplicity of randomness while offering insights into convergence rates and computational efficiency.</p>
+<hr/>
+<h2 id="part-1-estimating-pi-using-a-circle">Part 1: Estimating <span class="arithmatex">\(\pi\)</span> Using a Circle</h2>
+<h3 id="1-theoretical-foundation">1. Theoretical Foundation</h3>
+<p>The idea behind using the circle-based Monte Carlo method to estimate <span class="arithmatex">\(\pi\)</span> relies on the ratio of points inside a circle to the total number of points in a square. Consider a unit circle inscribed inside a square. The unit circle is centered at the origin with the equation:
+$$
+x^2 + y^2 \leq 1
+$$
+This circle is inscribed within a square of side length 2. If we randomly generate points <span class="arithmatex">\((x, y)\)</span> within the square (with <span class="arithmatex">\(x, y \in [-1, 1]\)</span>), we can check whether each point lies inside the circle using the equation above.
+The ratio of the area of the circle to the area of the square is:
+$$
+\frac{A_{\text{circle}}}{A_{\text{square}}} = \frac{\pi}{4}
+$$
+Thus, the ratio of points inside the circle to the total number of points will approximate the ratio of the areas, allowing us to estimate <span class="arithmatex">\(\pi\)</span>. Specifically:
+$$
+\pi \approx 4 \times \frac{\text{Number of points inside the circle}}{\text{Total number of points}}
+$$</p>
+<h3 id="2-simulation">2. Simulation</h3>
+<p>We'll simulate the process by generating random points in the square and counting how many fall inside the unit circle.</p>
+<h4 id="python-code-for-circle-based-monte-carlo-method">Python Code for Circle-Based Monte Carlo Method:</h4>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt
+def estimate_pi_advanced(num_points):
+   # Generate random points in a 2D space [-1, 1] x [-1, 1]
+   x = np.random.uniform(-1, 1, num_points)
+   y = np.random.uniform(-1, 1, num_points)
+   # Calculate the number of points inside the unit circle
+   inside_circle = np.sum(x<strong>2 + y</strong>2 &lt;= 1)
+   # Estimate Pi
+   pi_estimate = 4 * inside_circle / num_points
+   # Plotting
+   plt.figure(figsize=(6, 6))
+   plt.scatter(x, y, color='blue', s=1, alpha=0.5, label="Points")
+   plt.scatter(x[x<strong>2 + y</strong>2 &lt;= 1], y[x<strong>2 + y</strong>2 &lt;= 1], color='green', s=1, label="Inside Circle")
+   plt.scatter(x[x<strong>2 + y</strong>2 &gt; 1], y[x<strong>2 + y</strong>2 &gt; 1], color='red', s=1, label="Outside Circle")
+   plt.title(f"Monte Carlo Estimation of Pi: {pi_estimate}")
+   plt.gca().set_aspect('equal', adjustable='box')
+   plt.legend()
+   plt.show()
+   return pi_estimate</p>
+<h1 id="running-the-simulation-with-a-larger-number-of-points">Running the simulation with a larger number of points</h1>
+<p>num_points = 100000
+pi_estimate = estimate_pi_advanced(num_points)
+print(f"Estimated Pi: {pi_estimate}")</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
