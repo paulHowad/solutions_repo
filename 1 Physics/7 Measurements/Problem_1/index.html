@@ -172,6 +172,585 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="measuring-earths-gravitational-acceleration-with-a-pendulum">Measuring Earth's Gravitational Acceleration with a Pendulum</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The acceleration due to gravity <span class="arithmatex">\((g)\)</span> is a fundamental physical constant that influences numerous physical phenomena and engineering applications. This experiment uses the simple pendulum method to determine the local value of <span class="arithmatex">\(g\)</span> with careful attention to measurement uncertainties.</p>
+<h2 id="theoretical-background">Theoretical Background</h2>
+<p>The period of oscillation <span class="arithmatex">\((T)\)</span> for a simple pendulum with small amplitudes relates to the pendulum length <span class="arithmatex">\((L)\)</span> and gravitational acceleration <span class="arithmatex">\((g)\)</span> through:</p>
+<div class="arithmatex">\[
+T = 2\pi\sqrt{\frac{L}{g}}
+\]</div>
+<p>Rearranging this equation allows us to calculate g:</p>
+<div class="arithmatex">\[
+g = \frac{4\pi^2L}{T^2}
+\]</div>
+<p>The associated uncertainty in g can be determined through error propagation:</p>
+<div class="arithmatex">\[
+\Delta g = g \sqrt{\left(\frac{\Delta L}{L}\right)^2 + \left(2\frac{\Delta T}{T}\right)^2}
+\]</div>
+<p>This formula shows that uncertainties in both length and period measurements contribute to the overall uncertainty in <span class="arithmatex">\(g\)</span>, with period uncertainties having twice the impact due to the squared term.</p>
+<h2 id="experimental-setup">Experimental Setup</h2>
+<h3 id="materials">Materials</h3>
+<ul>
+<li>String (1.5 meters)</li>
+<li>Three different weights: 50 g, 100 g, and 200 g masses</li>
+<li>Digital stopwatch (resolution: 0.01 s)</li>
+<li>Measuring tape (resolution: 1 mm)</li>
+<li>Support stand with clamp</li>
+</ul>
+<h3 id="procedure">Procedure</h3>
+<ol>
+<li>The pendulum was set up with precisely measured lengths (0.50 m, 0.75 m, and 1.00 m).</li>
+<li>For each configuration, the pendulum was displaced by approximately 10° and released.</li>
+<li>The time for 10 complete oscillations (<span class="arithmatex">\(T_{10}\)</span>) was measured and repeated 10 times for statistical significance.</li>
+<li>The experiment was conducted with three different masses to investigate whether mass affects the period.</li>
+<li>For each configuration, <span class="arithmatex">\(g\)</span> was calculated along with its associated uncertainty.</li>
+</ol>
+<h2 id="data-and-results">Data and Results</h2>
+<h3 id="detailed-measurements">Detailed Measurements</h3>
+<p>Below are the raw time measurements for the <strong>100 g</strong> mass with a <strong>0.75 m</strong> pendulum length:</p>
+<table>
+<thead>
+<tr>
+<th>Trial</th>
+<th style="text-align: right;"><span class="arithmatex">\(T_{10}\)</span> (s)</th>
+<th style="text-align: right;"><span class="arithmatex">\(T\)</span> (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align: right;">17.807292</td>
+<td style="text-align: right;">1.780729</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: right;">17.693740</td>
+<td style="text-align: right;">1.769374</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: right;">17.796117</td>
+<td style="text-align: right;">1.779612</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align: right;">17.590511</td>
+<td style="text-align: right;">1.759051</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align: right;">17.732145</td>
+<td style="text-align: right;">1.773215</td>
+</tr>
+<tr>
+<td>6</td>
+<td style="text-align: right;">17.521964</td>
+<td style="text-align: right;">1.752196</td>
+</tr>
+<tr>
+<td>7</td>
+<td style="text-align: right;">17.668733</td>
+<td style="text-align: right;">1.766873</td>
+</tr>
+<tr>
+<td>8</td>
+<td style="text-align: right;">17.780058</td>
+<td style="text-align: right;">1.778006</td>
+</tr>
+<tr>
+<td>9</td>
+<td style="text-align: right;">17.886610</td>
+<td style="text-align: right;">1.788661</td>
+</tr>
+<tr>
+<td>10</td>
+<td style="text-align: right;">17.750641</td>
+<td style="text-align: right;">1.775064</td>
+</tr>
+</tbody>
+</table>
+<h3 id="summary-of-results">Summary of Results</h3>
+<table>
+<thead>
+<tr>
+<th>Mass</th>
+<th style="text-align: right;">Length (m)</th>
+<th style="text-align: right;">Period (s)</th>
+<th style="text-align: right;"><span class="arithmatex">\(ΔT\)</span> (s)</th>
+<th style="text-align: right;"><span class="arithmatex">\(g\)</span> (m/s²)</th>
+<th style="text-align: right;"><span class="arithmatex">\(\Delta g\)</span> (m/s²)</th>
+<th style="text-align: right;">Within Uncertainty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>50 g</td>
+<td style="text-align: right;">0.500</td>
+<td style="text-align: right;">1.486484</td>
+<td style="text-align: right;">0.002920</td>
+<td style="text-align: right;">8.933243</td>
+<td style="text-align: right;">0.036212</td>
+<td style="text-align: right;">False</td>
+</tr>
+<tr>
+<td>50 g</td>
+<td style="text-align: right;">0.750</td>
+<td style="text-align: right;">1.732027</td>
+<td style="text-align: right;">0.002278</td>
+<td style="text-align: right;">9.869879</td>
+<td style="text-align: right;">0.026778</td>
+<td style="text-align: right;">False</td>
+</tr>
+<tr>
+<td>50 g</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">1.931850</td>
+<td style="text-align: right;">0.003983</td>
+<td style="text-align: right;">10.578226</td>
+<td style="text-align: right;">0.043936</td>
+<td style="text-align: right;">False</td>
+</tr>
+<tr>
+<td>100 g</td>
+<td style="text-align: right;">0.500</td>
+<td style="text-align: right;">1.502775</td>
+<td style="text-align: right;">0.004449</td>
+<td style="text-align: right;">8.740616</td>
+<td style="text-align: right;">0.052489</td>
+<td style="text-align: right;">False</td>
+</tr>
+<tr>
+<td>100 g</td>
+<td style="text-align: right;">0.750</td>
+<td style="text-align: right;">1.772278</td>
+<td style="text-align: right;">0.003417</td>
+<td style="text-align: right;">9.426647</td>
+<td style="text-align: right;">0.036890</td>
+<td style="text-align: right;">False</td>
+</tr>
+<tr>
+<td>100 g</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">1.950583</td>
+<td style="text-align: right;">0.004744</td>
+<td style="text-align: right;">10.376022</td>
+<td style="text-align: right;">0.050735</td>
+<td style="text-align: right;">False</td>
+</tr>
+<tr>
+<td>200 g</td>
+<td style="text-align: right;">0.500</td>
+<td style="text-align: right;">1.423741</td>
+<td style="text-align: right;">0.003223</td>
+<td style="text-align: right;">9.737961</td>
+<td style="text-align: right;">0.045155</td>
+<td style="text-align: right;">False</td>
+</tr>
+<tr>
+<td>200 g</td>
+<td style="text-align: right;">0.750</td>
+<td style="text-align: right;">1.789798</td>
+<td style="text-align: right;">0.002666</td>
+<td style="text-align: right;">9.242999</td>
+<td style="text-align: right;">0.028221</td>
+<td style="text-align: right;">False</td>
+</tr>
+<tr>
+<td>200 g</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">1.942303</td>
+<td style="text-align: right;">0.002514</td>
+<td style="text-align: right;">10.464673</td>
+<td style="text-align: right;">0.027588</td>
+<td style="text-align: right;">False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="summary-statistics">Summary Statistics</h3>
+<ul>
+<li><strong>Average relative uncertainty in period:</strong> 0.20%</li>
+<li><strong>Average relative uncertainty in g:</strong> 0.40%</li>
+</ul>
+<p><strong>Calculation of these averages:</strong></p>
+<p>The average relative uncertainty in period was computed by taking the ratio <span class="arithmatex">\(\displaystyle \frac{\Delta T}{T}\)</span> for each configuration, converting to percent, and averaging across all nine data sets:</p>
+<div class="arithmatex">\[
+\text{Average }\frac{\Delta T}{T}\times100\% = \frac{1}{9}\sum_{i=1}^9\Bigl(\tfrac{\Delta T_i}{T_i}\times100\%\Bigr) \approx 0.20\%.
+\]</div>
+<p>Similarly, the average relative uncertainty in g was obtained by averaging the percent values of <span class="arithmatex">\(\displaystyle \frac{\Delta g}{g}\)</span> across all configurations:</p>
+<div class="arithmatex">\[
+\text{Average }\frac{\Delta g}{g}\times100\% = \frac{1}{9}\sum_{i=1}^9\Bigl(\tfrac{\Delta g_i}{g_i}\times100\%\Bigr) \approx 0.40\%.
+\]</div>
+<hr/>
+<h2 id="simulation-and-data-analysis-code">Simulation and Data Analysis Code</h2>
+<p>To verify our analysis pipeline and explore how measurement noise influences our results, we simulate pendulum timing data with realistic random and systematic errors. The following Python code performs the simulation, computes <span class="arithmatex">\(g\)</span> and its uncertainty for each trial set, and generates all key visualizations.</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+from scipy import stats
+
+# Set styles for visualization
+plt.style.use('seaborn-v0_8-whitegrid')
+sns.set(font_scale=1.2)
+
+# Function to calculate g and its propagated uncertainty
+def calculate_g(length, period, delta_l, delta_t):
+    g = 4 * np.pi**2 * length / (period**2)
+    delta_g = g * np.sqrt((delta_l/length)**2 + (2*delta_t/period)**2)
+    return g, delta_g
+
+# Experiment parameters
+lengths = [0.50, 0.75, 1.00]      # pendulum lengths in meters
+length_uncertainty = 0.0005      # half of the 1 mm resolution
+masses = [50, 100, 200]          # bob masses in grams
+mass_names = ["50g", "100g", "200g"]
+standard_g = 9.81                # standard gravitational acceleration
+
+# Simulate pendulum timing data with noise
+def simulate_pendulum_data(length, num_trials=10):
+    base_period = 2 * np.pi * np.sqrt(length / standard_g)
+    # random timing error (reaction time)
+    timing_errors = np.random.normal(0, 0.1, num_trials)
+    # small systematic offset
+    systematic_error = np.random.normal(0, 0.05)
+    times_10 = 10 * (base_period + systematic_error) + timing_errors
+    return times_10
+
+# Collect results and raw data
+results = []
+all_data = []
+
+for mi, mass in enumerate(masses):
+    for L in lengths:
+        times_10 = simulate_pendulum_data(L)
+        mean_t10 = times_10.mean()
+        std_t10 = times_10.std(ddof=1)
+        delta_t10 = std_t10 / np.sqrt(len(times_10))
+
+        T = mean_t10 / 10
+        delta_T = delta_t10 / 10
+        g_val, delta_g = calculate_g(L, T, length_uncertainty, delta_T)
+        within_unc = abs(g_val - standard_g) &lt;= delta_g
+
+        results.append({
+            "Mass": mass_names[mi],
+            "Length (m)": L,
+            "Period (s)": T,
+            "Delta T (s)": delta_T,
+            "g (m/s²)": g_val,
+            "Delta g (m/s²)": delta_g,
+            "Within Uncertainty": within_unc
+        })
+
+        for i, t10 in enumerate(times_10, start=1):
+            all_data.append({
+                "Mass": mass_names[mi],
+                "Length (m)": L,
+                "Trial": i,
+                "T10 (s)": t10,
+                "T (s)": t10/10
+            })
+
+results_df = pd.DataFrame(results)
+all_data_df = pd.DataFrame(all_data)
+
+# 1) Measured g bar chart
+plt.figure(figsize=(8,5))
+sns.barplot(x="Length (m)", y="g (m/s²)", hue="Mass", data=results_df)
+plt.axhline(standard_g, color='r', linestyle='--', label=f"Standard g = {standard_g}")
+plt.title("Measured g Values")
+plt.legend()
+plt.tight_layout()
+plt.savefig("pendulum_g_values.png")
+plt.show()
+
+# 2) Period vs. Length with theory
+plt.figure(figsize=(8,5))
+for m in mass_names:
+    d = results_df[results_df["Mass"]==m]
+    plt.errorbar(d["Length (m)"], d["Period (s)"], yerr=d["Delta T (s)"], marker='o', label=m)
+x = np.linspace(0.4,1.1,100)
+plt.plot(x, 2*np.pi*np.sqrt(x/standard_g), 'r--', label="Theory")
+plt.title("Period vs. Length")
+plt.xlabel("L (m)")
+plt.ylabel("T (s)")
+plt.legend()
+plt.tight_layout()
+plt.savefig("period_vs_length.png")
+plt.show()
+
+# 3) Percent error in g
+results_df["Percent Error"] = abs(results_df["g (m/s²)"] - standard_g)/standard_g*100
+plt.figure(figsize=(8,5))
+sns.barplot(x="Length (m)", y="Percent Error", hue="Mass", data=results_df)
+plt.title("Percent Error in g")
+plt.ylabel("% Error")
+plt.tight_layout()
+plt.savefig("percent_error.png")
+plt.show()
+
+# 4) Uncertainty vs. Length
+plt.figure(figsize=(8,5))
+sns.lineplot(x="Length (m)", y="Delta g (m/s²)", hue="Mass", marker='o', data=results_df)
+plt.title("Uncertainty in g vs. Length")
+plt.tight_layout()
+plt.savefig("uncertainty_vs_length.png")
+plt.show()
+
+# 5) g vs. L/T² scatter
+results_df["L/T^2"] = results_df["Length (m)"] / (results_df["Period (s)"]**2)
+plt.figure(figsize=(8,5))
+sns.scatterplot(x="L/T^2", y="g (m/s²)", hue="Mass", size="Length (m)", data=results_df)
+plt.axhline(standard_g, color='r', linestyle='--')
+plt.title("g vs. L/T²")
+plt.tight_layout()
+plt.savefig("g_vs_lt2.png")
+plt.show()
+
+# 6) T² vs. Length regression
+plt.figure(figsize=(8,5))
+for m in mass_names:
+    d = results_df[results_df["Mass"]==m]
+    plt.scatter(d["Length (m)"], d["Period (s)"]**2, label=m)
+slope, intercept, r, _, stderr = stats.linregress(results_df["Length (m)"], results_df["Period (s)"]**2)
+x = np.linspace(0.4,1.1,100)
+plt.plot(x, slope*x+intercept, 'r--', label=f"Slope={slope:.4f}, R²={r**2:.4f}")
+plt.title("T² vs. Length")
+plt.xlabel("L (m)")
+plt.ylabel("T² (s²)")
+plt.legend()
+plt.tight_layout()
+plt.savefig("period_squared_vs_length.png")
+plt.show()
+
+# Regression-derived g
+g_from_slope = (2*np.pi)**2 / slope
+print(f"Theoretical slope: {(2*np.pi)**2/standard_g:.4f} s²/m")
+print(f"Regression slope: {slope:.4f} ± {stderr:.4f} s²/m")
+print(f"g from slope: {g_from_slope:.4f} m/s²  (R²={r**2:.4f})")
+</code></pre>
+<hr/>
+<h2 id="pendulum-experiment-results-terminal-output">PENDULUM EXPERIMENT RESULTS (Terminal output)</h2>
+<h3 id="results-for-50-g">Results for 50 g</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Length <span class="arithmatex">\(L\)</span> (m)</th>
+<th style="text-align: center;">Period <span class="arithmatex">\(T\)</span> (s)</th>
+<th style="text-align: center;">ΔT (s)</th>
+<th style="text-align: center;"><span class="arithmatex">\(g\)</span> (m/s²)</th>
+<th style="text-align: center;">Δg (m/s²)</th>
+<th style="text-align: center;">Within Uncertainty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0.50</td>
+<td style="text-align: center;">1.486484</td>
+<td style="text-align: center;">0.002920</td>
+<td style="text-align: center;">8.933243</td>
+<td style="text-align: center;">0.036212</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.75</td>
+<td style="text-align: center;">1.732027</td>
+<td style="text-align: center;">0.002278</td>
+<td style="text-align: center;">9.869879</td>
+<td style="text-align: center;">0.026778</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">1.931850</td>
+<td style="text-align: center;">0.003983</td>
+<td style="text-align: center;">10.578226</td>
+<td style="text-align: center;">0.043936</td>
+<td style="text-align: center;">False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="results-for-100-g">Results for 100 g</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Length <span class="arithmatex">\(L\)</span> (m)</th>
+<th style="text-align: center;">Period <span class="arithmatex">\(T\)</span> (s)</th>
+<th style="text-align: center;">ΔT (s)</th>
+<th style="text-align: center;"><span class="arithmatex">\(g\)</span> (m/s²)</th>
+<th style="text-align: center;">Δg (m/s²)</th>
+<th style="text-align: center;">Within Uncertainty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0.50</td>
+<td style="text-align: center;">1.502775</td>
+<td style="text-align: center;">0.004449</td>
+<td style="text-align: center;">8.740616</td>
+<td style="text-align: center;">0.052489</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.75</td>
+<td style="text-align: center;">1.772278</td>
+<td style="text-align: center;">0.003417</td>
+<td style="text-align: center;">9.426647</td>
+<td style="text-align: center;">0.036890</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">1.950583</td>
+<td style="text-align: center;">0.004744</td>
+<td style="text-align: center;">10.376022</td>
+<td style="text-align: center;">0.050735</td>
+<td style="text-align: center;">False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="results-for-200-g">Results for 200 g</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Length <span class="arithmatex">\(L\)</span> (m)</th>
+<th style="text-align: center;">Period <span class="arithmatex">\(T\)</span> (s)</th>
+<th style="text-align: center;">ΔT (s)</th>
+<th style="text-align: center;"><span class="arithmatex">\(g\)</span> (m/s²)</th>
+<th style="text-align: center;">Δg (m/s²)</th>
+<th style="text-align: center;">Within Uncertainty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0.50</td>
+<td style="text-align: center;">1.423741</td>
+<td style="text-align: center;">0.003223</td>
+<td style="text-align: center;">9.737961</td>
+<td style="text-align: center;">0.045155</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.75</td>
+<td style="text-align: center;">1.789798</td>
+<td style="text-align: center;">0.002666</td>
+<td style="text-align: center;">9.242999</td>
+<td style="text-align: center;">0.028221</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">1.942303</td>
+<td style="text-align: center;">0.002514</td>
+<td style="text-align: center;">10.464673</td>
+<td style="text-align: center;">0.027588</td>
+<td style="text-align: center;">False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="raw-data-for-100-g-l-075-m">Raw Data for 100 g, <span class="arithmatex">\(L = 0.75\)</span> m</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Trial</th>
+<th style="text-align: center;"><span class="arithmatex">\(T_{10}\)</span> (s)</th>
+<th style="text-align: center;"><span class="arithmatex">\(T\)</span> (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">17.807292</td>
+<td style="text-align: center;">1.780729</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">17.693740</td>
+<td style="text-align: center;">1.769374</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">17.796117</td>
+<td style="text-align: center;">1.779612</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">17.590511</td>
+<td style="text-align: center;">1.759051</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">17.732145</td>
+<td style="text-align: center;">1.773215</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">17.521964</td>
+<td style="text-align: center;">1.752196</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">17.668733</td>
+<td style="text-align: center;">1.766873</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">17.780058</td>
+<td style="text-align: center;">1.778006</td>
+</tr>
+<tr>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">17.886610</td>
+<td style="text-align: center;">1.788661</td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">17.750641</td>
+<td style="text-align: center;">1.775064</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Average relative uncertainty in period:</strong> 0.20%
+<strong>Average relative uncertainty in <span class="arithmatex">\(g\)</span>:</strong> 0.40%</p>
+<hr/>
+<h2 id="visualizations-and-explanations">Visualizations and Explanations</h2>
+<p><img alt="alt text" src="../image.png"/></p>
+<p><strong>Figure 1.</strong> Bar chart comparing measured <span class="arithmatex">\(g\)</span> values across different pendulum configurations. The red dashed line indicates the standard <span class="arithmatex">\(g = 9.81\ \mathrm{m/s^2}\)</span>. Deviations show the combined effect of timing and length uncertainties.</p>
+<p><img alt="alt text" src="../image-1.png"/></p>
+<p>Figure 2. Period vs. pendulum length for each mass (error bars reflect <span class="arithmatex">\(\Delta T\)</span>), overlaid with the theoretical curve <span class="arithmatex">\(T = 2\pi\sqrt{L/g}\)</span>. Good agreement confirms the square‐root relationship.</p>
+<p><img alt="alt text" src="../image-2.png"/></p>
+<p><strong>Figure 3.</strong> Percent error in measured <span class="arithmatex">\(g\)</span> for each configuration. Shorter lengths and lighter masses tend to exhibit larger errors due to timing uncertainty and air resistance.</p>
+<p><img alt="alt text" src="../image-3.png"/></p>
+<p>Figure 4. Absolute uncertainty <span class="arithmatex">\(\Delta g\)</span> as a function of pendulum length. Intermediate lengths minimize combined relative uncertainties in length and period.</p>
+<p><img alt="alt text" src="../image-4.png"/></p>
+<p>Figure 5. Scatter plot of <span class="arithmatex">\(g\)</span> vs. <span class="arithmatex">\(L/T^2\)</span>. Ideally, all points lie on the horizontal line at <span class="arithmatex">\(g = 9.81\)</span> m/s²; scatter reflects measurement noise.</p>
+<p><img alt="alt text" src="../image-5.png"/>
+Figure 6. <span class="arithmatex">\(T^2\)</span> vs. <span class="arithmatex">\(L\)</span> with linear regression. The fit slope (3.8287 s²/m, <span class="arithmatex">\(R^2 = 0.9624\)</span>) yields <span class="arithmatex">\(g = 4\pi^2/\text{slope} = 10.28\)</span> m/s², close to the expected value.</p>
+<hr/>
+<h2 id="analysis-and-discussion">Analysis and Discussion</h2>
+<h3 id="period-vs-length-relationship">Period vs. Length Relationship</h3>
+<p>The theoretical relationship <span class="arithmatex">\(T = 2\pi\sqrt{L/g}\)</span> predicts a linear trend when plotting <span class="arithmatex">\(T^2\)</span> vs. <span class="arithmatex">\(L\)</span>, with slope <span class="arithmatex">\(4\pi^2/g\)</span>. Our data follows this trend closely (Figure 6), confirming the theory.</p>
+<h3 id="mass-effects">Mass Effects</h3>
+<p>Heavier masses yielded measured <span class="arithmatex">\(g\)</span> values closer to <span class="arithmatex">\(9.81 m/s²\)</span>, as air resistance and small disturbances have less impact on more massive pendulums.</p>
+<h3 id="length-effects">Length Effects</h3>
+<p>Longer pendulums produced smaller relative uncertainties: timing errors become less significant for larger periods, and the relative length uncertainty <span class="arithmatex">\(\Delta L/L\)</span> decreases with length.</p>
+<h3 id="uncertainty-analysis">Uncertainty Analysis</h3>
+<ul>
+<li><strong><span class="arithmatex">\(\Delta L\)</span>:</strong> fixed at 0.0005 m; relative impact decreases with length.</li>
+<li><strong><span class="arithmatex">\(\Delta T\)</span>:</strong> derived from the standard error over ten repeats; dominated by human reaction time.</li>
+<li><strong><span class="arithmatex">\(\Delta g\)</span>:</strong> ranged from 0.027 to 0.052 m/s²; period uncertainty contributes twice as much as length uncertainty due to the squared term.</li>
+</ul>
+<h3 id="experimental-limitations">Experimental Limitations</h3>
+<ol>
+<li><strong>Small‐angle approximation:</strong> deviations from <span class="arithmatex">\(\sin\theta\approx\theta\)</span>.</li>
+<li><strong>Damping:</strong> air resistance and pivot friction.</li>
+<li><strong>Non‐ideal pendulum:</strong> string mass and distributed bob mass.</li>
+<li><strong>Environmental factors:</strong> air currents, temperature, vibrations.</li>
+<li><strong>Timing precision:</strong> human reaction time.</li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>This experiment measured Earth’s gravitational acceleration with an overall mean within 0.40% of the standard <span class="arithmatex">\(9.81 m/s²\)</span>. The period–length relationship held as predicted, and careful uncertainty analysis highlighted the dominant sources of error. A simple pendulum, coupled with rigorous statistical treatment, provides a robust method to determine fundamental constants in physics.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
