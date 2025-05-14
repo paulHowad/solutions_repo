@@ -315,7 +315,7 @@ Figure 2. Period vs. pendulum length for each mass (error bars reflect $\Delta T
  
 ![alt text](image-3.png)
  
-Figure 4. Absolute uncertainty $\Delta g$ as a function of pendulum length. Intermediate lengths minimize combined relative uncertainties in length and period..
+Figure 4. Absolute uncertainty $\Delta g$ as a function of pendulum length. Intermediate lengths minimize combined relative uncertainties in length and period.
  
 ![alt text](image-4.png)
  
