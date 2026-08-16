@@ -358,4 +358,4 @@ Longer pendulums produced smaller relative uncertainties: timing errors become l
 
 ## Conclusion
  
-This experiment measured Earth’s gravitational acceleration with an overall mean within 0.40% of the standard $9.81 m/s²$. The period–length relationship held as predicted, and careful uncertainty analysis highlighted the dominant sources of error. A simple pendulum, coupled with rigorous statistical treatment, provides a robust method to determine fundamental constants in physics.
+This experiment measured Earth’s gravitational acceleration with an overall mean within 0.40% of the standard $9.81 m/s²$. The period–length relationship held as predicted, and careful uncertainty analysis highlighted the dominant sources of error. A simple pendulum, coupled with rigorous statistical treatment, provides a robust method to determine fundamental constants in physics.j
